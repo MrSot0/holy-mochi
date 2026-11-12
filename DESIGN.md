@@ -125,5 +125,5 @@ El globo dura según el largo del chiste y cambia cada ~10 s.
 
 ## Imagen para compartir
 
-`public/og.png` (1200×630) se genera con `npm run og`. Cambia `site` en
-`astro.config.mjs` por el dominio real para que la URL de la imagen sea correcta.
+`public/og.png` (1200×630) se genera con `npm run og`. El dominio está en `site`
+de `astro.config.mjs` (https://holy-mochi.vercel.app).

@@ -18,6 +18,6 @@ npm run build    # astro check + build estático en dist/
 - `src/data/mochis.ts`: el dibujo de cada mochi de sabor.
 - `src/scripts/acompanante.ts`: los comentarios de la mascota.
 - `npm run og`: regenera la imagen para redes (`public/og.png`).
-- `astro.config.mjs`: pon el dominio real en `site`.
+- `astro.config.mjs`: dominio público en `site` (https://holy-mochi.vercel.app).
 
 Todo lo que aparece entre `[CORCHETES]` es un dato pendiente.
