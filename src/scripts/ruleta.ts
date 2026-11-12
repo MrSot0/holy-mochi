@@ -338,6 +338,7 @@ function juegoAtrapa(panel: HTMLElement, alResultado: AlResultado): Minijuego {
 
   function fin() {
     jugando = false;
+    lienzo.style.touchAction = '';
     caen = [];
     dibujar('¡Tiempo!');
     empezar.disabled = false;
@@ -360,6 +361,7 @@ function juegoAtrapa(panel: HTMLElement, alResultado: AlResultado): Minijuego {
     $<HTMLElement>(panel, '[data-resultado]').hidden = true;
     medir();
     jugando = true;
+    lienzo.style.touchAction = 'none'; // mientras juega, el dedo mueve la bandeja y no la página
     caen = [];
     conteo = new Map();
     puntos = 0;
@@ -397,6 +399,7 @@ function juegoAtrapa(panel: HTMLElement, alResultado: AlResultado): Minijuego {
     detener() {
       cancelAnimationFrame(raf);
       jugando = false;
+      lienzo.style.touchAction = '';
       caen = [];
     },
   };

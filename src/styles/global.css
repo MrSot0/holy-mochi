@@ -90,7 +90,7 @@
   color: var(--color-tinta);
   text-decoration: none;
   transition: transform .15s, box-shadow .15s;
-  &:hover { transform: scale(1.05, .93) translateY(2px); }
+  @media (hover: hover) { &:hover { transform: scale(1.05, .93) translateY(2px); } }
   &:active { transform: translate(3px, 3px); box-shadow: var(--shadow-pop-sm); }
   @media (prefers-reduced-motion: reduce) { &:hover { transform: none; } }
 }
@@ -141,7 +141,7 @@
 .carta.abierta .carta-dorso { transform: rotateY(-180deg); }
 .carta.abierta .carta-frente { transform: rotateY(0); }
 .carta.pareja .carta-frente { animation: carta-pareja .5s ease-out; }
-.carta:hover:not(.abierta) .carta-dorso { transform: translateY(-4px) rotate(-2deg); }
+@media (hover: hover) { .carta:hover:not(.abierta) .carta-dorso { transform: translateY(-4px) rotate(-2deg); } }
 @keyframes carta-reparte { from { opacity: 0; transform: translateY(-50px) rotate(-10deg) scale(.8); } }
 @keyframes carta-pareja { 40% { transform: scale(1.12, .9); } 70% { transform: scale(.96, 1.06) translateY(-6px); } }
 
@@ -150,7 +150,7 @@
 .caja:not(:disabled) .caja-cuerpo, .caja:not(:disabled) .caja-tapa { animation: caja-sacude 2.4s ease-in-out infinite; }
 .caja:nth-child(2) .caja-cuerpo, .caja:nth-child(2) .caja-tapa { animation-delay: .4s; }
 .caja:nth-child(3) .caja-cuerpo, .caja:nth-child(3) .caja-tapa { animation-delay: .8s; }
-.caja:hover:not(:disabled) .caja-tapa { transform: translateY(-8px) rotate(-4deg); animation: none; }
+@media (hover: hover) { .caja:hover:not(:disabled) .caja-tapa { transform: translateY(-8px) rotate(-4deg); animation: none; } }
 .caja-tapa { transition: transform .2s; }
 .caja.abierta .caja-tapa { animation: tapa-vuela .6s ease-in forwards; }
 .caja.abierta .caja-mochi { animation: mochi-sale 1s .2s cubic-bezier(.3,1.4,.5,1) forwards; }
