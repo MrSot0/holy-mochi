@@ -1,0 +1,19 @@
+---
+interface Props {
+  cantidad: number;
+  tam?: number;
+}
+const { cantidad, tam = 18 } = Astro.props;
+const lista = Array.from({ length: cantidad });
+---
+{cantidad === 0 ? (
+  <span>Sin picante</span>
+) : (
+  <span role="img" aria-label={`Picante ${cantidad} de 4`} class="inline-flex items-end gap-0.5">
+    {lista.map((_, i) => (
+      <svg width={tam} height={Math.round(tam * 1.4)} viewBox="0 0 40 56" aria-hidden="true" class="llama-icono" style={`animation-delay:${i * 0.15}s`}>
+        <use href="#llama" />
+      </svg>
+    ))}
+  </span>
+)}

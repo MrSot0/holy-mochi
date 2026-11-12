@@ -1,0 +1,32 @@
+---
+import type { Nivel } from '../data/menu';
+
+interface Props {
+  nivel: Nivel;
+  /** Ancho en px. El alto se calcula con la proporción 240:280. */
+  ancho?: number;
+  /** Si se pasa, la mascota se anuncia como imagen; si no, es decorativa. */
+  etiqueta?: string;
+  class?: string;
+}
+
+const { nivel, ancho = 120, etiqueta, class: clase = '' } = Astro.props;
+
+const animacion: Record<Nivel, string> = {
+  1: 'anim-respira',
+  2: 'anim-tiembla',
+  3: 'anim-tiembla-rapido',
+  4: 'anim-risa',
+};
+const alto = Math.round((ancho * 280) / 240);
+---
+<svg
+  viewBox="0 0 240 280"
+  width={ancho}
+  height={alto}
+  class:list={['max-w-full h-auto', clase]}
+  {...(etiqueta ? { role: 'img', 'aria-label': etiqueta } : { 'aria-hidden': 'true' })}
+  focusable="false"
+>
+  <g class={animacion[nivel]}><use href={`#m${nivel}`} width="240" height="280" /></g>
+</svg>

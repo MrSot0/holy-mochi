@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+/* Tokens: ver DESIGN.md. Texto siempre en tinta sobre fondos pastel. */
+@theme {
+  --color-arroz: #FFF8F0;
+  --color-blanco: #FFFFFF;
+  --color-tinta: #3A1F3D;
+  --color-chile: #D7141F;
+  --color-chile-texto: #B3101A;
+  --color-oro: #FFC107;
+  --color-fuego: #FF6A00;
+
+  --color-fresa: #FFD6E2;
+  --color-fresa-fuerte: #FF9DBB;
+  --color-pina: #FFF1A8;
+  --color-parchita: #E3F2C1;
+  --color-mango: #FFCF9E;
+  --color-tabasco: #FFB4A6;
+  --color-cayena: #FF9D8C;
+  --color-cielo: #D4E6FF;
+
+  --font-display: "Bagel Fat One", "Arial Rounded MT Bold", system-ui, sans-serif;
+  --font-sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-pop-sm: 3px 3px 0 var(--color-tinta);
+  --shadow-pop: 5px 5px 0 var(--color-tinta);
+  --shadow-pop-lg: 6px 6px 0 var(--color-tinta);
+  --shadow-pop-chile: 6px 6px 0 var(--color-chile-texto);
+
+  --radius-blob: 50% 50% 46% 54% / 60% 56% 44% 40%;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
+  body {
+    @apply bg-arroz text-tinta font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  :focus-visible {
+    outline: 3px solid var(--color-tinta);
+    outline-offset: 4px;
+    border-radius: 12px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+/* Patrones de fondo (siempre suaves, nunca bajo texto sin contraste) */
+@utility bg-lunares {
+  background-image: radial-gradient(rgb(58 31 61 / .14) 2.2px, transparent 2.8px);
+  background-size: 24px 24px;
+}
+@utility bg-ichimatsu {
+  background-image: conic-gradient(rgb(255 157 187 / .2) 25%, transparent 0 50%, rgb(255 157 187 / .2) 0 75%, transparent 0);
+  background-size: 56px 56px;
+}
+@utility bg-rayas {
+  background-image: repeating-linear-gradient(-45deg, rgb(255 255 255 / .38) 0 14px, transparent 14px 28px);
+}
+
+@utility seccion {
+  padding-block: clamp(64px, 10vw, 128px);
+  padding-inline: clamp(20px, 5vw, 72px);
+}
+@utility contenedor {
+  max-width: 1140px;
+  margin-inline: auto;
+}
+
+/* Botones "squish" */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 30px;
+  border: 3px solid var(--color-tinta);
+  border-radius: 999px;
+  box-shadow: var(--shadow-pop);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-tinta);
+  text-decoration: none;
+  transition: transform .15s, box-shadow .15s;
+  &:hover { transform: scale(1.05, .93) translateY(2px); }
+  &:active { transform: translate(3px, 3px); box-shadow: var(--shadow-pop-sm); }
+  @media (prefers-reduced-motion: reduce) { &:hover { transform: none; } }
+}
+
+/* Animaciones de la mascota */
+.anim-respira { transform-box: fill-box; transform-origin: 50% 100%; animation: respira 2.6s ease-in-out infinite; }
+.anim-tiembla { animation: tiembla .18s linear infinite; }
+.anim-tiembla-rapido { animation: tiembla .11s linear infinite; }
+.anim-risa { transform-box: fill-box; transform-origin: 50% 100%; animation: risa .45s ease-in-out infinite alternate; }
+.fl { transform-box: fill-box; transform-origin: 50% 100%; animation: llama .6s ease-in-out infinite alternate; }
+.dr { animation: gota 1.7s ease-in infinite; }
+.rs { animation: humo 2.2s ease-out infinite; }
+.hf { animation: parpadeo .8s steps(2) infinite; }
+.llama-icono { transform-origin: 50% 100%; animation: llama .7s ease-in-out infinite alternate; }
+
+@keyframes respira { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.05, .95); } }
+@keyframes tiembla { 0%, 100% { transform: translateX(-2px); } 50% { transform: translateX(2px); } }
+@keyframes risa { from { transform: scale(1, 1) rotate(-2deg); } to { transform: scale(1.04, .94) rotate(2deg); } }
+@keyframes llama { from { transform: scale(.85, .8); } to { transform: scale(1.1, 1.15); } }
+@keyframes gota { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(36px); opacity: 0; } }
+@keyframes humo { 0% { transform: translateY(0); opacity: .9; } 100% { transform: translateY(-34px); opacity: 0; } }
+@keyframes parpadeo { 0% { opacity: 1; } 50% { opacity: .45; } }
+@keyframes marquesina { to { transform: translateX(-50%); } }
+
+.marquesina { display: flex; width: max-content; animation: marquesina 26s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-respira, .anim-tiembla, .anim-tiembla-rapido, .anim-risa, .fl, .dr, .rs, .hf, .llama-icono, .marquesina { animation: none; }
+}

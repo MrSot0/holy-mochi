@@ -1,0 +1,23 @@
+---
+import Mascota from './Mascota.astro';
+import { preguntas } from '../data/menu';
+---
+<section id="preguntas" data-nivel="3" class="seccion bg-parchita" aria-labelledby="preguntas-titulo">
+  <div class="contenedor flex flex-wrap gap-12">
+    <div class="flex flex-[1_1_320px] flex-col items-start gap-5">
+      <h2 id="preguntas-titulo" class="font-display text-[clamp(40px,6vw,68px)] leading-none">¿Dudas antes de enchilarte?</h2>
+      <Mascota nivel={2} ancho={170} />
+    </div>
+    <div class="flex min-w-0 flex-[999_1_520px] flex-col gap-3.5" data-acordeon>
+      {preguntas.map((p, i) => (
+        <details class="faq group rounded-3xl border-[3px] border-tinta bg-blanco shadow-pop open:bg-pina" open={i === 0}>
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 text-[19px] font-bold [&::-webkit-details-marker]:hidden">
+            {p.pregunta}
+            <span aria-hidden="true" class="grid size-9 shrink-0 place-items-center rounded-full border-[3px] border-tinta bg-arroz text-2xl leading-none transition-transform group-open:rotate-45">+</span>
+          </summary>
+          <p class="px-5 pb-5">{p.respuesta}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

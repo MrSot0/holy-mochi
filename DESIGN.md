@@ -2,27 +2,39 @@
 
 Mochis dulces y picantes con retos. Tono: juguetón, descarado, japonés-pop.
 Todo es blando, con contorno grueso y sombra dura, como si se pudiera apretar.
-No hay modo oscuro: la marca vive en bloques de color plano (el fondo "Sésamo"
-ya hace de sección oscura).
+No hay modo oscuro: la marca vive en bloques de color plano (sin secciones
+oscuras, todo en pastel).
 
 ## Color
 
-| Token        | Valor     | Rol |
-|--------------|-----------|-----|
-| `arroz`      | `#FFF8F0` | Fondo principal, texto sobre fondos oscuros |
-| `sesamo`     | `#3A1F3D` | Texto, contornos, sombras duras, secciones oscuras |
-| `chile`      | `#D7141F` | Primario: hero, botón principal sobre claro, acento picante |
-| `oro`        | `#FFC107` | Botón principal sobre oscuro/rojo, halo, foco |
-| `fuego`      | `#FF6A00` | Retos y llamas (solo donde hay picante) |
-| `anil`       | `#26359A` | Contraste frío: sección About/FAQ, títulos "Clásicos" |
-| `fresa`      | `#FF5C93` | Mejillas, dulzura, fondo de tarjetas suaves |
-| `matcha`     | `#4DAA4F` | Solo decorativo (sabor matcha). Nunca texto |
-| `chile-dark` | `#8A0E18` | Bocas/sombras internas de la mascota |
+Regla de oro: **texto siempre en tinta sobre fondos pastel**. Nunca texto claro
+sobre rojo o naranja. El violeta (tinta) es para texto, contornos y sombras,
+no para fondos grandes.
 
-Contraste comprobado: sésamo/arroz 15:1 · arroz/chile 7:1 · arroz/añil 9.9:1 ·
-sésamo/fuego 5:1 · sésamo/fresa 5:1 · sésamo/oro 9:1. Sésamo sobre chile NO (2.1:1).
+| Token           | Valor     | Rol |
+|-----------------|-----------|-----|
+| `arroz`         | `#FFF8F0` | Fondo base, navbar |
+| `blanco`        | `#FFFFFF` | Tarjetas y chips sobre pastel |
+| `tinta`         | `#3A1F3D` | Texto, contornos 3px, sombras duras |
+| `chile-texto`   | `#B3101A` | Texto rojo (logo, "Picantes", nivel 4). 6:1 sobre pastel |
+| `chile`/`fuego` | `#D7141F` / `#FF6A00` | Solo llamas e ilustración, nunca fondo de texto |
+| `oro`           | `#FFC107` | Botón de pedido |
+| `fresa`         | `#FFD6E2` | Sabor fresa, marquesina, pie |
+| `fresa-fuerte`  | `#FF9DBB` | Botón principal del hero |
+| `pina`          | `#FFF1A8` | Sabor piña, hero, FAQ abierta |
+| `parchita`      | `#E3F2C1` | Sabor parchita, sección de preguntas |
+| `mango`         | `#FFCF9E` | Sabor mango, sección de retos |
+| `tabasco`       | `#FFB4A6` | Sabor tabasco (nivel 3) |
+| `cayena`        | `#FF9D8C` | Sabor cayena (nivel 4) |
+| `cielo`         | `#D4E6FF` | Sección Nosotros (contraste frío) |
 
-Regla: el fuego y las llamas animadas aparecen solo donde hay reto o picante.
+Contraste: tinta sobre cualquier pastel ≥ 7:1.
+
+### Patrones
+
+- `bg-lunares`: puntos de tinta al 14% (hero y pie).
+- `bg-ichimatsu`: damero japonés en fresa al 20% (sabores).
+- `bg-rayas`: rayas diagonales blancas al 38% (retos).
 
 ## Tipografía
 
@@ -47,25 +59,26 @@ Escala de 4px (Tailwind por defecto). Secciones: `clamp(64px, 10vw, 128px)` vert
 
 ## Forma y profundidad
 
-- Contorno: `3px solid sesamo` en todo lo interactivo y las tarjetas.
+- Contorno: `3px solid tinta` en todo lo interactivo y las tarjetas.
 - Radio: `pill` 999px (botones, chips) · `xl` 32px (tarjetas) · `blob` radios
   asimétricos (muestras de color, burbujas).
-- Sombra dura: `sm` 3px 3px 0 sesamo · `md` 6px 6px 0 sesamo. Sin desenfoque, nunca.
+- Sombra dura: `sm` 3px 3px 0 tinta · `md` 6px 6px 0 tinta. Sin desenfoque, nunca.
 - Hover "squish": `scale(1.06,.92) translateY(3px)` en botones; tarjetas giran -1.5°.
 
 ## Componentes
 
-- **Botón primario**: fondo chile, texto arroz (sobre claro) u oro + texto sésamo
-  (sobre rojo/oscuro). Pill, contorno 3px, sombra md. Foco: anillo oro 4px + halo sésamo.
+- **Botón primario**: fondo fresa-fuerte u oro, texto tinta. Pill, contorno 3px, sombra md.
+  Foco: contorno tinta 3px con separación de 4px.
   Deshabilitado: opacidad .5, sin sombra.
-- **Botón secundario**: fondo arroz, texto sésamo, mismo contorno y sombra.
+- **Botón secundario**: fondo arroz, texto tinta, mismo contorno y sombra.
 - **Enlace quieto**: texto subrayado 2px, offset 4px.
-- **Tarjeta**: arroz, contorno 3px, radio xl, sombra md.
-- **Medidor de picante**: 1–4 llamas (svg `#fl`), siempre con texto alternativo "Picante n de 4".
-- **FAQ**: `<details>` con contorno, el "+" rota a "×"; abierto = fondo oro.
-- **Navegación**: barra sésamo pegajosa, logo en oro, enlaces arroz.
+- **Tarjeta**: pastel del sabor o blanco, contorno 3px, radio xl, sombra md.
+- **Medidor de picante**: 1–4 llamas (svg `#llama`), siempre con texto alternativo "Picante n de 4".
+- **FAQ**: `<details>` con contorno, el "+" rota a "×"; abierto = fondo piña.
+- **Navegación**: barra arroz pegajosa con borde tinta, mascota nivel 1 junto al logo en chile-texto.
 - **Mascota acompañante**: fija abajo a la derecha, cambia de nivel con el scroll
-  (scroll-driven animations; en navegadores sin soporte se queda en nivel 1).
+  (IntersectionObserver en `src/scripts/acompanante.ts`, cada sección declara `data-nivel`).
+  En móvil se oculta el globo de texto para no tapar contenido.
 
 ## Imagen e iconos
 

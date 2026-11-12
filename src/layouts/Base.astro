@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+import SpriteMascota from '../components/SpriteMascota.astro';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+}
+const { titulo, descripcion } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={descripcion} />
+    <meta name="theme-color" content="#FFF1A8" />
+    <meta property="og:title" content={titulo} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet" />
+    <title>{titulo}</title>
+  </head>
+  <body>
+    <a href="#contenido" class="sr-only z-50 rounded-full border-[3px] border-tinta bg-oro px-4 py-2 font-bold focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Saltar al contenido</a>
+    <SpriteMascota />
+    <slot />
+  </body>
+</html>

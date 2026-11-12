@@ -1,0 +1,44 @@
+---
+import Mascota from './Mascota.astro';
+import Llamas from './Llamas.astro';
+import { dulces, picantes } from '../data/menu';
+---
+<section id="sabores" data-nivel="2" class="seccion bg-arroz bg-ichimatsu" aria-labelledby="sabores-titulo">
+  <div class="contenedor flex flex-col gap-10">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <h2 id="sabores-titulo" class="font-display text-[clamp(40px,6vw,76px)] leading-none">Los sabores</h2>
+      <p class="max-w-[24em] rounded-2xl border-[3px] border-tinta bg-blanco px-3.5 py-2.5">Precio por unidad. Las llamas marcan el nivel de picante.</p>
+    </div>
+
+    <h3 class="font-display text-[32px]">Dulces <span class="text-[22px]" lang="ja">甘</span></h3>
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5">
+      {dulces.map((s) => (
+        <li class:list={['flex flex-col gap-2 rounded-[28px] border-[3px] border-tinta p-6 shadow-pop-lg', s.fondo]}>
+          <h4 class="font-display text-[28px] leading-tight">{s.nombre}</h4>
+          <p>{s.descripcion}</p>
+          <div class="mt-auto flex justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
+            <Llamas cantidad={s.llamas} />
+            <span>{s.precio}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h3 class="mt-4 font-display text-[32px] text-chile-texto">Picantes <span class="text-[22px]" lang="ja">辛</span></h3>
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5">
+      {picantes.map((s) => (
+        <li class:list={['flex flex-wrap items-center gap-5 rounded-[28px] border-[3px] border-tinta p-6 shadow-pop-lg', s.fondo]}>
+          {s.mascota && <Mascota nivel={s.mascota} ancho={120} />}
+          <div class="flex min-w-[200px] flex-1 flex-col gap-2">
+            <h4 class="font-display text-[30px] leading-tight">{s.nombre}</h4>
+            <p>{s.descripcion}</p>
+            <div class="flex items-center justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
+              <Llamas cantidad={s.llamas} />
+              <span>{s.precio}</span>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

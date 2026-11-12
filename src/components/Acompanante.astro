@@ -1,0 +1,43 @@
+---
+import Mascota from './Mascota.astro';
+import type { Nivel } from '../data/menu';
+
+const frases: Record<Nivel, string> = {
+  1: '¡Hola! Te acompaño por la carta.',
+  2: 'Mira los sabores. Los de fuego pican.',
+  3: '¿Te atreves con un reto?',
+  4: '¡Pide ya! Muajaja.',
+};
+const niveles: Nivel[] = [1, 2, 3, 4];
+---
+<!-- Mascota que sube de nivel al bajar por la página (ver src/scripts/acompanante.ts) -->
+<div
+  id="acompanante"
+  data-nivel="1"
+  aria-hidden="true"
+  class="pointer-events-none fixed right-3 z-20 aspect-[240/280] w-[clamp(76px,16vw,120px)]"
+  style="bottom: calc(12px + env(safe-area-inset-bottom, 0px))"
+>
+  {niveles.map((n) => (
+    <div data-capa={n} class="absolute inset-0 opacity-0 transition-opacity duration-300">
+      <Mascota nivel={n} ancho={120} class="size-full" />
+    </div>
+  ))}
+  <div class="absolute right-full bottom-[62%] mr-1 hidden sm:grid w-[min(170px,44vw)] rounded-[20px] border-[3px] border-tinta bg-arroz px-3 py-2.5 text-[14px] leading-tight font-bold shadow-pop-sm sm:text-[15px]">
+    {niveles.map((n) => (
+      <span data-frase={n} class="col-start-1 row-start-1 opacity-0 transition-opacity duration-300">{frases[n]}</span>
+    ))}
+  </div>
+</div>
+
+<style>
+  #acompanante[data-nivel="1"] [data-capa="1"], #acompanante[data-nivel="1"] [data-frase="1"],
+  #acompanante[data-nivel="2"] [data-capa="2"], #acompanante[data-nivel="2"] [data-frase="2"],
+  #acompanante[data-nivel="3"] [data-capa="3"], #acompanante[data-nivel="3"] [data-frase="3"],
+  #acompanante[data-nivel="4"] [data-capa="4"], #acompanante[data-nivel="4"] [data-frase="4"] { opacity: 1; }
+</style>
+
+<script>
+  import { iniciarAcompanante } from '../scripts/acompanante';
+  iniciarAcompanante();
+</script>

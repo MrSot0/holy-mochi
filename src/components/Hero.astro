@@ -1,0 +1,27 @@
+---
+import Mascota from './Mascota.astro';
+import { site } from '../data/site';
+---
+<section id="inicio" data-nivel="1" class="seccion bg-pina bg-lunares">
+  <div class="contenedor flex flex-wrap items-center gap-12">
+    <div class="flex min-w-0 flex-[999_1_520px] flex-col items-start gap-6">
+      <span class="rounded-full border-[3px] border-tinta bg-blanco px-3.5 py-1.5 text-[15px] font-bold">Mochis artesanales en {site.ciudad}</span>
+      <h1 class="font-display text-[clamp(48px,8vw,104px)] leading-[.95]">
+        Mochis que pican. <span class="text-chile-texto">Mochis que retan.</span>
+      </h1>
+      <p class="max-w-[30em] text-[clamp(18px,2.2vw,22px)] leading-normal">
+        Fresa, piña, parchita y mango para los dulceros. Tabasco y cayena para los valientes. Elige tu sabor y acepta un reto.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="#sabores" class="btn bg-fresa-fuerte">Ver los sabores</a>
+        <a href="#retos" class="btn bg-blanco">Aceptar un reto</a>
+      </div>
+    </div>
+    <div class="flex flex-[1_1_300px] flex-col items-center gap-4">
+      <div class="border-[3px] border-tinta bg-fresa px-8 pt-6 pb-3 shadow-pop-lg" style="border-radius: var(--radius-blob)">
+        <Mascota nivel={1} ancho={300} etiqueta="Mochi mascota sonriente con halo" class="w-[min(300px,62vw)]" />
+      </div>
+      <p class="rounded-full border-[3px] border-tinta bg-blanco px-4 py-2 font-bold shadow-pop-sm">Nivel 1 de 4 · Suave</p>
+    </div>
+  </div>
+</section>

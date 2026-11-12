@@ -1,0 +1,21 @@
+---
+const items = [
+  { t: 'Fresa' }, { t: 'Piña' }, { t: 'Parchita' }, { t: 'Mango' },
+  { t: 'Tabasco', picante: true }, { t: 'Cayena', picante: true }, { t: 'Reto aceptado' },
+];
+const grupo = [...items, ...items];
+---
+<div class="overflow-hidden border-y-[3px] border-tinta bg-fresa py-3.5 font-display text-[22px]" aria-hidden="true">
+  <div class="marquesina">
+    {[0, 1].map(() => (
+      <div class="flex items-center gap-7 pr-7 whitespace-nowrap">
+        {grupo.map((i) => (
+          <>
+            <span class={i.picante ? 'text-chile-texto' : ''}>{i.t}</span>
+            <svg width="16" height="22" viewBox="0 0 40 56" class="llama-icono"><use href="#llama" /></svg>
+          </>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>

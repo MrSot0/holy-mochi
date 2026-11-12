@@ -1,0 +1,16 @@
+---
+import Mascota from './Mascota.astro';
+import { site, enlaceWhatsApp, enlaceInstagram } from '../data/site';
+const ig = enlaceInstagram();
+---
+<footer id="pedido" data-nivel="4" class="seccion border-t-[3px] border-tinta bg-fresa bg-lunares pb-48">
+  <div class="contenedor flex flex-col items-center gap-6 text-center">
+    <Mascota nivel={4} ancho={140} />
+    <h2 class="font-display text-[clamp(36px,6vw,80px)] leading-none">¿Hasta qué nivel llegas?</h2>
+    <a href={enlaceWhatsApp()} class="btn bg-oro">Pedir por WhatsApp</a>
+    <p class="rounded-full border-[3px] border-tinta bg-blanco px-4 py-1.5">
+      WhatsApp {site.whatsapp} · Instagram {ig ? <a href={ig} class="underline decoration-2 underline-offset-4">{site.instagram}</a> : site.instagram} · {site.ciudad}
+    </p>
+    <p class="text-[15px]">© {new Date().getFullYear()} {site.nombre}</p>
+  </div>
+</footer>

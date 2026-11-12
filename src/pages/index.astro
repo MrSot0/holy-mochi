@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Marquesina from '../components/Marquesina.astro';
+import Nosotros from '../components/Nosotros.astro';
+import Sabores from '../components/Sabores.astro';
+import Retos from '../components/Retos.astro';
+import Preguntas from '../components/Preguntas.astro';
+import Pie from '../components/Pie.astro';
+import Acompanante from '../components/Acompanante.astro';
+---
+<Base
+  titulo="Holy Mochi · Mochis que pican, mochis que retan"
+  descripcion="Mochis de fresa, piña, parchita y mango, y picantes de tabasco y cayena. Elige tu nivel y acepta un reto."
+>
+  <Header />
+  <main id="contenido">
+    <Hero />
+    <Marquesina />
+    <Nosotros />
+    <Sabores />
+    <Retos />
+    <Preguntas />
+  </main>
+  <Pie />
+  <Acompanante />
+</Base>

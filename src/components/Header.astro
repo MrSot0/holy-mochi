@@ -1,0 +1,27 @@
+---
+import Mascota from './Mascota.astro';
+import { site, enlaceWhatsApp } from '../data/site';
+
+const enlaces = [
+  { href: '#nosotros', texto: 'Nosotros' },
+  { href: '#sabores', texto: 'Sabores' },
+  { href: '#retos', texto: 'Retos' },
+  { href: '#preguntas', texto: 'Preguntas' },
+];
+---
+<header class="sticky top-0 z-30 border-b-[3px] border-tinta bg-arroz">
+  <div class="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-x-8 gap-y-2 px-4 py-2 sm:px-8">
+    <a href="#inicio" class="flex items-center gap-2.5 no-underline" aria-label={`${site.nombre}, ir al inicio`}>
+      <Mascota nivel={1} ancho={44} />
+      <span class="font-display text-[26px] leading-none text-chile-texto sm:text-[28px]">{site.nombre}</span>
+    </a>
+    <nav aria-label="Principal" class="order-3 -mx-4 w-[calc(100%+2rem)] overflow-x-auto border-t-2 border-dashed border-tinta/30 px-4 pt-1 md:order-none md:mx-0 md:w-auto md:border-0 md:p-0">
+      <ul class="flex gap-6 whitespace-nowrap font-semibold">
+        {enlaces.map((e) => (
+          <li><a href={e.href} class="inline-block py-2 underline-offset-4 hover:underline decoration-2">{e.texto}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a href={enlaceWhatsApp()} class="btn bg-oro !min-h-[44px] !px-5 !py-2 !text-base !shadow-pop-sm">Pedir</a>
+  </div>
+</header>

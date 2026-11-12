@@ -1,0 +1,50 @@
+---
+import Mascota from './Mascota.astro';
+import { retos } from '../data/menu';
+import { site } from '../data/site';
+
+const alturas = ['', 'md:min-h-[200px]', 'md:min-h-[240px]'];
+const pasos = [
+  { titulo: 'Pide tu caja', texto: 'Elige sabores y escríbenos por WhatsApp.' },
+  { titulo: 'Graba sin cortes', texto: 'Come, aguanta y no pares la cámara.' },
+  { titulo: 'Etiquétanos', texto: `Sube el video y etiqueta a ${site.instagram}.` },
+];
+---
+<section id="retos" data-nivel="3" class="seccion bg-mango bg-rayas" aria-labelledby="retos-titulo">
+  <div class="contenedor flex flex-col gap-12">
+    <div class="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
+      <h2 id="retos-titulo" class="font-display text-[clamp(40px,6vw,76px)] leading-none">Tickets de reto</h2>
+      <p class="max-w-[26em] text-[19px] leading-normal">
+        Graba el reto sin cortes, etiqueta a {site.instagram} y te sellamos el ticket. Premio: {site.premio}.
+      </p>
+    </div>
+
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-end gap-7">
+      {retos.map((r, i) => (
+        <li class:list={[
+          'flex overflow-hidden rounded-3xl border-[3px] border-tinta bg-blanco',
+          r.nivel === 4 ? 'shadow-pop-chile' : 'shadow-pop-lg',
+          alturas[i],
+        ]}>
+          <div class="flex flex-1 flex-col gap-2 p-6">
+            <span class:list={['text-[15px] font-bold', r.nivel === 4 && 'text-chile-texto']}>Nivel {r.nivel}</span>
+            <h3 class="font-display text-[28px] leading-tight">{r.nombre}</h3>
+            <p>{r.descripcion}</p>
+          </div>
+          <div class:list={['flex w-24 shrink-0 items-center justify-center border-l-[3px] border-dashed border-tinta', r.talon]}>
+            <Mascota nivel={r.nivel} ancho={76} />
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <ol class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4" aria-label="Cómo participar">
+      {pasos.map((p, i) => (
+        <li class="flex items-center gap-3.5 rounded-[20px] border-[3px] border-tinta bg-arroz px-5 py-4">
+          <span class="font-display text-[44px] leading-none" aria-hidden="true">{i + 1}</span>
+          <div><b>{p.titulo}</b><p>{p.texto}</p></div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
