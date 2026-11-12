@@ -77,9 +77,20 @@ Escala de 4px (Tailwind por defecto). Secciones: `clamp(64px, 10vw, 128px)` vert
 - **Medidor de picante**: 1–4 llamas (svg `#llama`), siempre con texto alternativo "Picante n de 4".
 - **FAQ**: `<details>` con contorno, el "+" rota a "×"; abierto = fondo piña.
 - **Navegación**: barra arroz pegajosa con borde tinta, mascota nivel 1 junto al logo en chile-texto.
+  Se oculta al bajar y vuelve al subir (o al recibir el foco).
+  En móvil (< 768px) solo logo y botón de menú: abre un menú a pantalla completa (piña con lunares)
+  con la mascota saltando encima de los enlaces grandes. Cierra con la X, Escape o al tocar un enlace;
+  el foco queda dentro mientras está abierto.
 - **Mascota acompañante**: fija abajo a la derecha, cambia de nivel con el scroll
   (IntersectionObserver en `src/scripts/acompanante.ts`, cada sección declara `data-nivel`).
   En móvil se oculta el globo de texto para no tapar contenido.
+
+## Móvil
+
+- Todo centrado (`text-align` y alineaciones de flex) por debajo de 768px.
+- Hero sin texto de relleno: los seis mochis llegan caminando desde los bordes (dulces por la
+  izquierda, picantes por la derecha, escalonados) y se reúnen en dos filas sobre el titular.
+- La mascota acompañante no comenta en el hero para no tapar los botones.
 
 ## Imagen e iconos
 

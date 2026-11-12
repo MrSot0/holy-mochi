@@ -62,6 +62,8 @@ export function iniciarAcompanante(): void {
   const hablar = (id: string) => {
     clearTimeout(ocultar);
     clearTimeout(siguiente);
+    // en móvil no habla en el hero para no tapar los botones
+    if (id === 'inicio' && innerWidth < 768) return;
     const frase = elegir(id);
     if (!frase || acompanante.classList.contains('apartado')) return;
     globo.classList.remove('visible');

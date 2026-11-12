@@ -1,27 +1,52 @@
 ---
 import Mascota from './Mascota.astro';
+import MochiSabor from './MochiSabor.astro';
 import { site } from '../data/site';
+import type { SaborId } from '../data/mochis';
+
+// Móvil: los seis mochis llegan desde los bordes y se reúnen
+const atras: SaborId[] = ['fresa', 'pina', 'parchita'];
+const delante: SaborId[] = ['mango', 'tabasco', 'cayena'];
 ---
-<section id="inicio" data-nivel="1" class="seccion bg-pina bg-lunares">
-  <div class="contenedor flex flex-wrap items-center gap-12">
+<section id="inicio" data-nivel="1" class="seccion bg-pina bg-lunares max-md:!pt-8">
+  <div class="contenedor flex flex-wrap items-center gap-8 md:gap-12">
+    <div
+      class="reunion w-full md:hidden"
+      role="img"
+      aria-label="Los seis mochis de Holy Mochi juntos: fresa, piña, parchita, mango, tabasco y cayena"
+    >
+      <div class="flex items-end justify-center gap-1">
+        {atras.map((id, i) => (
+          <MochiSabor id={id} ancho={92} camina="izq" retraso={i * 180} class="w-[26vw] max-w-[110px]" />
+        ))}
+      </div>
+      <div class="-mt-[9vw] flex items-end justify-center gap-1">
+        {delante.map((id, i) => (
+          <MochiSabor id={id} ancho={104} camina="der" retraso={300 + i * 180} class="w-[29vw] max-w-[124px]" />
+        ))}
+      </div>
+      <div class="mx-auto -mt-3 h-4 w-[80%] rounded-[50%] bg-tinta/15" aria-hidden="true"></div>
+    </div>
+
     <div class="flex min-w-0 flex-[999_1_520px] flex-col items-start gap-6">
-      <span class="rounded-full border-[3px] border-tinta bg-blanco px-3.5 py-1.5 text-[15px] font-bold">Mochis artesanales en {site.ciudad}</span>
-      <h1 class="font-display text-[clamp(48px,8vw,104px)] leading-[.95]">
+      <span class="hidden rounded-full border-[3px] border-tinta bg-blanco px-3.5 py-1.5 text-[15px] md:inline-block">Mochis artesanales en {site.ciudad}</span>
+      <h1 class="font-display text-[clamp(44px,8vw,104px)] leading-[.95]">
         Mochis que pican. <span class="text-chile-texto">Mochis que retan.</span>
       </h1>
-      <p class="max-w-[30em] text-[clamp(18px,2.2vw,22px)] leading-normal">
+      <p class="hidden max-w-[30em] text-[clamp(18px,2.2vw,22px)] leading-normal md:block">
         Fresa, piña, parchita y mango para los dulceros. Tabasco y cayena para los valientes. Elige tu sabor y acepta un reto.
       </p>
+      <p class="text-[18px] md:hidden">{site.ciudad} · Todos a $1</p>
       <div class="flex flex-wrap gap-4">
         <a href="#sabores" class="btn bg-fresa-fuerte">Ver los sabores</a>
         <a href="#retos" class="btn bg-blanco">Aceptar un reto</a>
       </div>
     </div>
-    <div class="flex flex-[1_1_300px] flex-col items-center gap-4">
+    <div class="hidden flex-[1_1_300px] flex-col items-center gap-4 md:flex">
       <div class="border-[3px] border-tinta bg-fresa px-8 pt-6 pb-3 shadow-pop-lg" style="border-radius: var(--radius-blob)">
         <Mascota nivel={1} ancho={300} etiqueta="Mochi mascota sonriente con halo" camina="der" class="w-[min(300px,62vw)]" />
       </div>
-      <p class="rounded-full border-[3px] border-tinta bg-blanco px-4 py-2 font-bold shadow-pop-sm">Nivel 1 de 4 · Suave</p>
+      <p class="rounded-full border-[3px] border-tinta bg-blanco px-4 py-2 shadow-pop-sm">Nivel 1 de 4 · Suave</p>
     </div>
   </div>
 </section>

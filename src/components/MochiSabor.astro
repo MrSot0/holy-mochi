@@ -7,8 +7,10 @@ interface Props {
   etiqueta?: string;
   class?: string;
   camina?: 'izq' | 'der';
+  /** Retraso en ms antes de empezar a caminar */
+  retraso?: number;
 }
-const { id, ancho = 110, etiqueta, class: clase = '', camina } = Astro.props;
+const { id, ancho = 110, etiqueta, class: clase = '', camina, retraso } = Astro.props;
 const alto = Math.round((ancho * 280) / 240);
 ---
 <svg
@@ -19,6 +21,7 @@ const alto = Math.round((ancho * 280) / 240);
   {...(etiqueta ? { role: 'img', 'aria-label': etiqueta } : { 'aria-hidden': 'true' })}
   focusable="false"
   data-camina={camina}
+  data-retraso={retraso}
 >
   <g class={animacionSabor[id]}><use href={`#s-${id}`} width="240" height="280" /></g>
 </svg>

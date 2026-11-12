@@ -12,7 +12,7 @@ const EXCLUIR = '[data-sin-entrada], nav, #acompanante';
 
 type Tipo = 'camina' | 'salta' | 'sube';
 
-function caminar(el: Element, desde: 'izq' | 'der') {
+function caminar(el: Element, desde: 'izq' | 'der', retraso = 0) {
   const r = el.getBoundingClientRect();
   const distancia = desde === 'izq' ? -(r.right + 30) : innerWidth - r.left + 30;
   const pasos = Math.min(12, Math.max(4, Math.round(Math.abs(distancia) / 85)));
@@ -29,7 +29,7 @@ function caminar(el: Element, desde: 'izq' | 'der') {
     }
   }
   // pequeño rebote final al llegar
-  const anim = el.animate(frames, { duration: pasos * 230, fill: 'backwards' });
+  const anim = el.animate(frames, { duration: pasos * 230, delay: retraso, fill: 'backwards' });
   anim.finished.then(() =>
     el.animate(
       [
@@ -99,7 +99,10 @@ export function iniciarEntradas(): void {
       porPadre.set(padre, n + 1);
       const retraso = Math.min(n * 110, 550);
       el.classList.remove('e-espera');
-      if (tipo === 'camina') caminar(el, (el as HTMLElement).dataset.camina === 'der' ? 'der' : 'izq');
+      if (tipo === 'camina') {
+        const h = el as HTMLElement;
+        caminar(el, h.dataset.camina === 'der' ? 'der' : 'izq', Number(h.dataset.retraso ?? 0));
+      }
       else if (tipo === 'salta') saltar(el, retraso);
       else subir(el, retraso);
     });

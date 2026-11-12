@@ -17,7 +17,7 @@ import { dulces, picantes } from '../data/menu';
           <MochiSabor id={s.id} ancho={96} class="-mt-14 mb-1 self-center" />
           <h4 class="font-display text-[28px] leading-tight">{s.nombre}</h4>
           <p>{s.descripcion}</p>
-          <div class="mt-auto flex justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
+          <div data-no-centrar class="mt-auto flex justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
             <Llamas cantidad={s.llamas} />
             <span>{s.precio}</span>
           </div>
@@ -33,7 +33,7 @@ import { dulces, picantes } from '../data/menu';
           <div class="flex min-w-[200px] flex-1 flex-col gap-2">
             <h4 class="font-display text-[30px] leading-tight">{s.nombre}</h4>
             <p>{s.descripcion}</p>
-            <div class="flex items-center justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
+            <div data-no-centrar class="flex items-center justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
               <Llamas cantidad={s.llamas} />
               <span>{s.precio}</span>
             </div>
