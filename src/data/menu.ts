@@ -38,9 +38,10 @@ export interface Reto {
 }
 
 export const retos: Reto[] = [
+  { nombre: 'Reto a ciegas', nivel: 1, descripcion: 'Un mochi dulce con los ojos cerrados. Adivina el sabor al primer bocado.', talon: 'bg-pina' },
   { nombre: 'Reto del minuto', nivel: 2, descripcion: 'Un mochi de Tabasco y 60 segundos sin agua.', talon: 'bg-fresa' },
   { nombre: 'Reto doble', nivel: 3, descripcion: 'Dos mochis de Tabasco, uno tras otro y sin pausa.', talon: 'bg-tabasco' },
-  { nombre: 'Reto Cayena', nivel: 4, descripcion: 'Un mochi de Cayena entero. Solo para valientes.', talon: 'bg-cayena' },
+  { nombre: 'Reto Cayena', nivel: 4, descripcion: 'Un mochi de Cayena, el demonio, entero. Solo para valientes.', talon: 'bg-cayena' },
 ];
 
 export const nivelesMascota: { nivel: Nivel; nombre: string; gesto: string; fondo: string }[] = [

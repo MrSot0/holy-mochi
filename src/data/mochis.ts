@@ -23,18 +23,6 @@ const caraSudando =
   `<path d="M104 180Q120 212 136 180Z" fill="#8A0E18" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
   `<path class="dr" d="M196 118C188 132 188 140 196 146C204 140 204 132 196 118Z" fill="#2FA4F0"/>`;
 
-const caraMalvada =
-  `<path d="M58 118Q44 92 52 70Q74 82 88 104Z" fill="#FFC107" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
-  `<path d="M182 118Q196 92 188 70Q166 82 152 104Z" fill="#FFC107" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>`;
-
-const caraMalvadaFrente =
-  `<circle cx="66" cy="190" r="15" fill="#8A0E18"/><circle cx="174" cy="190" r="15" fill="#8A0E18"/>` +
-  `<ellipse cx="92" cy="164" rx="12" ry="11" fill="#FFC107" stroke="${T}" stroke-width="3"/><ellipse cx="148" cy="164" rx="12" ry="11" fill="#FFC107" stroke="${T}" stroke-width="3"/>` +
-  `<ellipse cx="92" cy="165" rx="3" ry="9" fill="${T}"/><ellipse cx="148" cy="165" rx="3" ry="9" fill="${T}"/>` +
-  `<path d="M70 142L108 158M170 142L132 158" stroke="${T}" stroke-width="8" stroke-linecap="round"/>` +
-  `<path d="M88 188Q120 226 152 188Q120 198 88 188Z" fill="${T}" stroke="${T}" stroke-width="3" stroke-linejoin="round"/>` +
-  `<path d="M98 191L105 205L112 193Z M128 193L135 205L142 191Z" fill="#FFF8F0"/>`;
-
 const fresa =
   `<path d="M120 100C94 88 84 58 100 44C108 38 115 41 120 46C125 41 132 38 140 44C156 58 146 88 120 100Z" fill="#E8384F" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
   [[108, 60], [130, 58], [119, 72], [104, 76], [135, 76], [120, 88]].map(([x, y]) => `<ellipse cx="${x}" cy="${y}" rx="2.4" ry="3.4" fill="#FFE27A"/>`).join('') +
@@ -62,10 +50,9 @@ const tabasco =
   `<path d="M128 44C130 34 138 28 146 28" fill="none" stroke="${HOJA}" stroke-width="7" stroke-linecap="round"/>` +
   `<path d="M118 70C118 62 120 56 124 52" fill="none" stroke="#FF8A8A" stroke-width="4" stroke-linecap="round"/>`;
 
-const cayena =
-  `<path d="M74 100C82 62 120 40 170 46C182 48 182 60 170 62C132 64 104 82 90 108Z" fill="#B3101A" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
-  `<path d="M172 46C180 38 188 36 196 38" fill="none" stroke="${HOJA}" stroke-width="7" stroke-linecap="round"/>` +
-  `<path d="M100 74C112 62 128 56 146 54" fill="none" stroke="#FF6A55" stroke-width="4" stroke-linecap="round"/>`;
+/** Cayena es el mochi demonio (la mascota en nivel 4) */
+const demonio =
+  `<g transform="translate(36,246) scale(1.4)"><g class="fl"><path d="M0 0C-12 -10 -10 -26 0 -44C10 -26 12 -10 0 0Z" fill="#FF6A00"/><path d="M0 0C-6 -6 -5 -16 0 -26C5 -16 6 -6 0 0Z" fill="#FFC107"/></g></g><g transform="translate(204,246) scale(1.4)"><g class="fl"><path d="M0 0C-12 -10 -10 -26 0 -44C10 -26 12 -10 0 0Z" fill="#FF6A00"/><path d="M0 0C-6 -6 -5 -16 0 -26C5 -16 6 -6 0 0Z" fill="#FFC107"/></g></g><path d="M58 118Q40 84 50 56Q78 72 92 100Z" fill="#FFC107" stroke="#3A1F3D" stroke-width="4" stroke-linejoin="round"/><path d="M182 118Q200 84 190 56Q162 72 148 100Z" fill="#FFC107" stroke="#3A1F3D" stroke-width="4" stroke-linejoin="round"/><ellipse class="hf" cx="120" cy="62" rx="44" ry="11" fill="none" stroke="#FF6A00" stroke-width="9" transform="rotate(-12 120 62)"/><path d="M30 192C30 117 70 82 120 82C170 82 210 117 210 192C210 222 190 237 120 237C50 237 30 222 30 192Z" fill="#D7141F" stroke="#3A1F3D" stroke-width="5"/><circle cx="66" cy="190" r="15" fill="#8A0E18"/><circle cx="174" cy="190" r="15" fill="#8A0E18"/><ellipse cx="92" cy="164" rx="12" ry="11" fill="#FFC107" stroke="#3A1F3D" stroke-width="3"/><ellipse cx="148" cy="164" rx="12" ry="11" fill="#FFC107" stroke="#3A1F3D" stroke-width="3"/><ellipse cx="92" cy="165" rx="3" ry="9" fill="#3A1F3D"/><ellipse cx="148" cy="165" rx="3" ry="9" fill="#3A1F3D"/><path d="M70 142L108 158M170 142L132 158" stroke="#3A1F3D" stroke-width="8" stroke-linecap="round"/><path d="M88 188Q120 226 152 188Q120 198 88 188Z" fill="#3A1F3D" stroke="#3A1F3D" stroke-width="3" stroke-linejoin="round"/><path d="M98 191L105 205L112 193Z M128 193L135 205L142 191Z" fill="#FFF8F0"/>`;
 
 export const mochiSvg: Record<SaborId, string> = {
   fresa: cuerpo('#FFC2D4') + caraFeliz('#FF5C93') + fresa,
@@ -73,7 +60,7 @@ export const mochiSvg: Record<SaborId, string> = {
   parchita: cuerpo('#D8EC9A') + caraFeliz('#FF9DBB') + parchita,
   mango: cuerpo('#FFC98A') + caraFeliz('#FF6A4D') + mango,
   tabasco: cuerpo('#FFA48C') + caraSudando + tabasco,
-  cayena: caraMalvada + cuerpo('#FF6A55') + caraMalvadaFrente + cayena,
+  cayena: demonio,
 };
 
 /** Clase de animación según el carácter del sabor */

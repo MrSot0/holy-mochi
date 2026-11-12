@@ -3,7 +3,8 @@ import Mascota from './Mascota.astro';
 import { retos } from '../data/menu';
 import { site } from '../data/site';
 
-const alturas = ['', 'md:min-h-[200px]', 'md:min-h-[240px]'];
+// Escalera: cada nivel un poco más alto que el anterior
+const alturas = ['', 'lg:min-h-[200px]', 'lg:min-h-[230px]', 'lg:min-h-[260px]'];
 const pasos = [
   { titulo: 'Pide tu caja', texto: 'Elige tus sabores. Todos a $1.' },
   { titulo: 'Graba sin cortes', texto: 'Come, aguanta y no pares la cámara.' },
@@ -19,19 +20,19 @@ const pasos = [
       </p>
     </div>
 
-    <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,300px),1fr))] items-end gap-7">
+    <ul class="grid grid-cols-1 items-end gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {retos.map((r, i) => (
         <li class:list={[
-          'flex overflow-hidden rounded-3xl border-[3px] border-tinta bg-blanco',
+          'flex overflow-hidden rounded-3xl border-[3px] border-tinta bg-blanco lg:flex-col-reverse lg:justify-end',
           r.nivel === 4 ? 'shadow-pop-chile' : 'shadow-pop-lg',
           alturas[i],
         ]}>
-          <div class="flex flex-1 flex-col gap-2 p-6">
+          <div class="flex flex-1 flex-col gap-2 p-6 lg:p-5">
             <span class:list={['text-[15px] font-bold', r.nivel === 4 && 'text-chile-texto']}>Nivel {r.nivel}</span>
-            <h3 class="font-display text-[28px] leading-tight">{r.nombre}</h3>
+            <h3 class="font-display text-[28px] leading-tight lg:text-[25px]">{r.nombre}</h3>
             <p>{r.descripcion}</p>
           </div>
-          <div class:list={['flex w-24 shrink-0 items-center justify-center border-l-[3px] border-dashed border-tinta', r.talon]}>
+          <div class:list={['flex w-24 shrink-0 items-center justify-center border-l-[3px] border-dashed border-tinta lg:w-full lg:border-b-[3px] lg:border-l-0 lg:py-3', r.talon]}>
             <Mascota nivel={r.nivel} ancho={76} />
           </div>
         </li>

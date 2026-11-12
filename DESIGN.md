@@ -114,8 +114,8 @@ Canvas, tablero y cajas se dimensionan con `100svh` para caber en la pantalla:
 ## Mochis por sabor
 
 `src/data/mochis.ts` define un mochi por sabor con el cuerpo del color de su fruta y la
-fruta encima (fresa, corona de piña, media parchita, mango, ají tabasco, cayena con
-cuernos). Se usan en la carta, la memoria, el canvas de Atrapa el mochi y los resultados.
+fruta encima (fresa, corona de piña, media parchita, mango, ají tabasco; Cayena es el mochi demonio
+de nivel 4). Se usan en la carta, la memoria, el canvas de Atrapa el mochi y los resultados.
 Las mascotas de nivel (m1–m4) siguen para los niveles y la acompañante.
 
 ## Acompañante
