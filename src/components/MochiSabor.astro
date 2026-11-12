@@ -1,0 +1,24 @@
+---
+import { animacionSabor, type SaborId } from '../data/mochis';
+
+interface Props {
+  id: SaborId;
+  ancho?: number;
+  etiqueta?: string;
+  class?: string;
+  camina?: 'izq' | 'der';
+}
+const { id, ancho = 110, etiqueta, class: clase = '', camina } = Astro.props;
+const alto = Math.round((ancho * 280) / 240);
+---
+<svg
+  viewBox="0 0 240 280"
+  width={ancho}
+  height={alto}
+  class:list={['max-w-full h-auto overflow-visible', clase]}
+  {...(etiqueta ? { role: 'img', 'aria-label': etiqueta } : { 'aria-hidden': 'true' })}
+  focusable="false"
+  data-camina={camina}
+>
+  <g class={animacionSabor[id]}><use href={`#s-${id}`} width="240" height="280" /></g>
+</svg>

@@ -8,10 +8,7 @@ import { site } from '../data/site';
     <div class="flex min-w-0 flex-[1_1_460px] flex-col gap-5">
       <h2 id="nosotros-titulo" class="text-[15px] font-bold tracking-[.12em] uppercase">Nosotros</h2>
       <p class="font-display text-[clamp(34px,4.6vw,58px)] leading-[1.05]">Empieza dulce. Termina en llamas.</p>
-      <p class="max-w-[34em]">
-        Holy Mochi mezcla el mochi japonés con fruta tropical y chile. Cada mochi lleva su medidor de picante para que sepas en qué te metes.
-      </p>
-      <p class="max-w-[34em] rounded-2xl border-[3px] border-dashed border-tinta bg-blanco px-4 py-3">{site.historia}</p>
+      {site.historia.map((parrafo) => <p class="max-w-[34em]">{parrafo}</p>)}
     </div>
     <ul class="grid flex-[1_1_380px] grid-cols-2 gap-3.5" aria-label="Niveles de picante de la mascota">
       {nivelesMascota.map((n) => (

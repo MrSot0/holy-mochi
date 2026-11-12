@@ -2,21 +2,15 @@
 import Mascota from './Mascota.astro';
 import type { Nivel } from '../data/menu';
 
-const frases: Record<Nivel, string> = {
-  1: '¡Hola! Te acompaño por la carta.',
-  2: 'Mira los sabores. Los de fuego pican.',
-  3: '¿Te atreves con un reto?',
-  4: '¡Pide ya! Muajaja.',
-};
 const niveles: Nivel[] = [1, 2, 3, 4];
 ---
-<!-- Mascota que sube de nivel al bajar por la página (ver src/scripts/acompanante.ts) -->
+<!-- Mascota que sube de nivel al bajar y suelta comentarios (ver src/scripts/acompanante.ts) -->
 <div
   id="acompanante"
   data-nivel="1"
   data-camina="der"
   aria-hidden="true"
-  class="pointer-events-none fixed right-3 z-20 aspect-[240/280] w-[clamp(76px,16vw,120px)]"
+  class="pointer-events-none fixed right-3 z-20 aspect-[240/280] w-[clamp(72px,16vw,120px)]"
   style="bottom: calc(12px + env(safe-area-inset-bottom, 0px))"
 >
   {niveles.map((n) => (
@@ -24,20 +18,23 @@ const niveles: Nivel[] = [1, 2, 3, 4];
       <Mascota nivel={n} ancho={120} class="size-full" />
     </div>
   ))}
-  <div class="absolute right-full bottom-[62%] mr-1 hidden sm:grid w-[min(170px,44vw)] rounded-[20px] border-[3px] border-tinta bg-arroz px-3 py-2.5 text-[14px] leading-tight font-bold shadow-pop-sm sm:text-[15px]">
-    {niveles.map((n) => (
-      <span data-frase={n} class="col-start-1 row-start-1 opacity-0 transition-opacity duration-300">{frases[n]}</span>
-    ))}
-  </div>
+  <p
+    id="acompanante-globo"
+    class="globo absolute right-[70%] bottom-[92%] w-[min(220px,58vw)] rounded-[20px] border-[3px] border-tinta bg-arroz px-3.5 py-2.5 text-[14px] leading-snug shadow-pop-sm sm:text-[15px]"
+  ></p>
 </div>
 
 <style>
   #acompanante { transition: opacity .3s, translate .4s cubic-bezier(.3,1.4,.5,1); }
   #acompanante.apartado { opacity: 0; translate: 140% 0; }
-  #acompanante[data-nivel="1"] [data-capa="1"], #acompanante[data-nivel="1"] [data-frase="1"],
-  #acompanante[data-nivel="2"] [data-capa="2"], #acompanante[data-nivel="2"] [data-frase="2"],
-  #acompanante[data-nivel="3"] [data-capa="3"], #acompanante[data-nivel="3"] [data-frase="3"],
-  #acompanante[data-nivel="4"] [data-capa="4"], #acompanante[data-nivel="4"] [data-frase="4"] { opacity: 1; }
+  #acompanante[data-nivel="1"] [data-capa="1"],
+  #acompanante[data-nivel="2"] [data-capa="2"],
+  #acompanante[data-nivel="3"] [data-capa="3"],
+  #acompanante[data-nivel="4"] [data-capa="4"] { opacity: 1; }
+  .globo { opacity: 0; transform: scale(.6) translateY(12px); transform-origin: 90% 100%; transition: opacity .25s, transform .35s cubic-bezier(.3,1.6,.5,1); }
+  .globo::after { content: ""; position: absolute; right: 14px; bottom: -11px; width: 16px; height: 16px; background: inherit; border-right: 3px solid var(--color-tinta); border-bottom: 3px solid var(--color-tinta); transform: rotate(45deg); }
+  .globo.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .globo { transition: opacity .2s; transform: none; } }
 </style>
 
 <script>

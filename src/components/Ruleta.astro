@@ -1,5 +1,5 @@
 ---
-import Mascota from './Mascota.astro';
+import MochiSabor from './MochiSabor.astro';
 
 type Juego = 'atrapa' | 'memoria' | 'caja';
 const juegos: { id: Juego; lineas: [string, string]; nombre: string }[] = [
@@ -28,18 +28,19 @@ const cajas = [
   { color: 'bg-parchita', cinta: 'bg-mango' },
 ];
 ---
-<section id="ruleta" data-nivel="3" class="seccion bg-cielo bg-lunares" aria-labelledby="ruleta-titulo">
-  <div class="contenedor flex flex-col gap-10">
-    <div class="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
+<section id="ruleta" data-nivel="3" class="seccion !pt-[clamp(32px,5vw,64px)] bg-cielo bg-lunares" aria-labelledby="ruleta-titulo">
+  <div class="contenedor flex flex-col gap-6">
+    <div class="flex flex-col items-center gap-2 text-center">
       <h2 id="ruleta-titulo" class="text-[clamp(40px,6vw,76px)] leading-none">La ruleta del reto</h2>
-      <p class="max-w-[26em] text-[19px]">Gira, juega y descubre qué mochi te toca. Al final te lo apartamos por WhatsApp.</p>
+      <p class="max-w-[30em] text-[19px]">Gira, juega y descubre qué mochi te toca. Comparte tu resultado y gana un mochi gratis.</p>
     </div>
 
-    <div class="flex flex-wrap items-start gap-10">
-      <!-- Ruleta -->
-      <div class="flex flex-[1_1_320px] flex-col items-center gap-5">
-        <div class="relative w-[min(360px,86vw)]">
-          <svg viewBox="0 0 40 40" width="44" height="44" aria-hidden="true" class="absolute -top-3 left-1/2 z-10 -translate-x-1/2 drop-shadow-[3px_3px_0_#3A1F3D]">
+    <!-- Vista 1: la ruleta, centrada -->
+    <div id="vista-ruleta" class="flex flex-col items-center gap-5">
+      <div class="flex items-end justify-center gap-[clamp(8px,3vw,40px)]">
+        <MochiSabor id="tabasco" ancho={110} class="hidden md:block" />
+        <div class="relative w-[max(220px,min(440px,86vw,calc(100svh-450px)))]">
+          <svg viewBox="0 0 40 40" width="48" height="48" aria-hidden="true" class="absolute -top-4 left-1/2 z-10 -translate-x-1/2 drop-shadow-[3px_3px_0_#3A1F3D]">
             <path d="M20 38L4 6H36Z" fill="#B3101A" stroke="#3A1F3D" stroke-width="3" stroke-linejoin="round" />
           </svg>
           <svg id="rueda" viewBox="0 0 300 300" class="block h-auto w-full rounded-full shadow-pop-lg" role="img" aria-label="Ruleta con tres juegos: Atrapa el mochi, Memoria picante y Caja de la suerte">
@@ -58,66 +59,65 @@ const cajas = [
             <svg id="rueda-mascota" viewBox="0 0 240 280" class="w-[72%]" aria-hidden="true"><use href="#m1" width="240" height="280" /></svg>
           </div>
         </div>
-        <button id="girar" type="button" class="btn bg-fresa-fuerte">Girar la ruleta</button>
-        <p id="ruleta-estado" class="min-h-[1.6em] text-center" aria-live="polite"></p>
-        <div class="flex flex-wrap items-center justify-center gap-2 text-[15px]">
-          <span>O juega directo:</span>
-          {juegos.map((j) => (
-            <button type="button" data-ir={j.id} class="rounded-full border-2 border-tinta bg-blanco px-3 py-1.5 hover:bg-pina">{j.nombre}</button>
-          ))}
-        </div>
+        <MochiSabor id="cayena" ancho={110} class="hidden md:block" />
       </div>
+      <button id="girar" type="button" class="btn bg-fresa-fuerte !px-10 !text-[20px]">Girar la ruleta</button>
+      <p id="ruleta-estado" class="min-h-[1.6em] text-center text-[20px]" aria-live="polite"></p>
+      <div class="flex flex-wrap items-center justify-center gap-2 text-[15px]">
+        <span>O juega directo:</span>
+        {juegos.map((j) => (
+          <button type="button" data-ir={j.id} class="min-h-[40px] rounded-full border-2 border-tinta bg-blanco px-3.5 py-1.5 hover:bg-pina">{j.nombre}</button>
+        ))}
+      </div>
+    </div>
 
-      <!-- Escenario de los juegos -->
-      <div id="escenario" data-sin-entrada class="flex min-w-0 flex-[999_1_520px] flex-col rounded-[32px] border-[3px] border-tinta bg-arroz p-5 shadow-pop-lg sm:p-7">
-        <!-- Inicio -->
-        <div data-panel="inicio" class="flex flex-col items-center gap-4 py-8 text-center">
-          <Mascota nivel={2} ancho={150} camina="izq" />
-          <p class="text-[24px]">Gira la ruleta para empezar</p>
-          <p class="max-w-[28em]">Tres juegos, un premio: tu próximo mochi. Cuanto más arriesgues, más picante el resultado.</p>
-        </div>
-
+    <!-- Vista 2: el juego elegido, ajustado al alto de la pantalla -->
+    <div id="escenario" hidden data-sin-entrada class="mx-auto w-full max-w-[920px] scroll-mt-24 rounded-[32px] border-[3px] border-tinta bg-arroz p-4 shadow-pop-lg sm:p-6">
+      <div class="mb-3 flex flex-nowrap items-center justify-between gap-3 border-b-[3px] border-dashed border-tinta/40 pb-3">
+        <button type="button" data-volver class="btn bg-blanco !min-h-[44px] !px-5 !py-2 !text-base !shadow-pop-sm">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="mr-2"><path d="M15 5l-7 7 7 7" /></svg>
+          <span class="sm:hidden">Volver</span><span class="hidden sm:inline">Volver a la ruleta</span>
+        </button>
+        <span data-juego-actual class="rounded-full border-[3px] border-tinta bg-pina px-4 py-1.5 text-[clamp(15px,2.4vw,24px)]"></span>
+      </div>
+      <div class="flex min-w-0 flex-col">
         <!-- Juego 1: Atrapa el mochi -->
-        <div data-panel="atrapa" hidden class="flex flex-col gap-4">
-          <h3 tabindex="-1" class="text-[30px] leading-tight">Atrapa el mochi</h3>
-          <p>Mueve la bandeja con el dedo, el ratón o las flechas. Tienes 20 segundos. Los picantes valen más: Tabasco 2 puntos, Cayena 3.</p>
-          <div class="flex flex-wrap justify-between gap-2 text-[18px]">
+        <div data-panel="atrapa" hidden class="flex flex-col gap-3">
+          <h3 tabindex="-1" class="sr-only">Atrapa el mochi</h3>
+          <p class="text-[15px]">Mueve la bandeja con el dedo, el ratón o las flechas. 20 segundos. Tabasco vale 2 puntos y Cayena 3.</p>
+          <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-[15px] sm:text-[17px] [&>span:last-child]:justify-self-end">
             <span>Tiempo: <b data-tiempo>20</b> s</span>
+            <button type="button" data-empezar class="btn bg-oro !min-h-[44px] !py-2 !text-base !shadow-pop-sm">Empezar</button>
             <span>Puntos: <b data-puntos>0</b></span>
           </div>
-          <canvas data-lienzo tabindex="0" aria-label="Zona de juego. Usa las flechas izquierda y derecha para mover la bandeja." class="aspect-[4/3] max-h-[440px] w-full touch-none rounded-3xl border-[3px] border-tinta bg-blanco"></canvas>
-          <ul data-leyenda class="flex flex-wrap gap-x-4 gap-y-1 text-[14px]"></ul>
-          <div class="flex flex-wrap gap-3">
-            <button type="button" data-empezar class="btn bg-oro">Empezar</button>
-          </div>
+          <canvas data-lienzo tabindex="0" aria-label="Zona de juego. Usa las flechas izquierda y derecha para mover la bandeja." class="mx-auto aspect-[4/3] w-[min(100%,max(240px,calc((100svh-370px)*4/3)))] max-sm:w-[min(100%,max(240px,calc((100svh-430px)*4/3)))] touch-none rounded-3xl border-[3px] border-tinta bg-blanco"></canvas>
+          <ul data-leyenda class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[13px]"></ul>
           <div data-resultado hidden></div>
         </div>
 
         <!-- Juego 2: Memoria picante -->
-        <div data-panel="memoria" hidden class="flex flex-col gap-4">
-          <h3 tabindex="-1" class="text-[30px] leading-tight">Memoria picante</h3>
-          <p>Encuentra las 6 parejas de sabores. La primera pareja que encuentres será tu sabor estrella.</p>
-          <div class="flex flex-wrap justify-between gap-2 text-[18px]">
+        <div data-panel="memoria" hidden class="flex flex-col gap-3">
+          <h3 tabindex="-1" class="sr-only">Memoria picante</h3>
+          <p class="text-[15px]">Encuentra las 6 parejas. La primera que encuentres será tu sabor estrella.</p>
+          <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-[15px] sm:text-[17px] [&>span:last-child]:justify-self-end">
             <span>Parejas: <b data-parejas>0</b> / 6</span>
+            <button type="button" data-reiniciar class="btn bg-blanco !min-h-[44px] !py-2 !text-base !shadow-pop-sm">Barajar</button>
             <span>Intentos: <b data-intentos>0</b></span>
           </div>
           <p data-aviso class="sr-only" aria-live="polite"></p>
-          <div data-tablero class="grid grid-cols-4 gap-2 sm:gap-3"></div>
-          <div class="flex flex-wrap gap-3">
-            <button type="button" data-reiniciar class="btn bg-blanco">Barajar de nuevo</button>
-          </div>
+          <div data-tablero class="mx-auto grid w-[min(100%,max(260px,calc(100svh-330px)))] max-sm:w-[min(100%,max(240px,calc(100svh-380px)))] grid-cols-4 gap-2 sm:gap-3"></div>
           <div data-resultado hidden></div>
         </div>
 
         <!-- Juego 3: Caja de la suerte -->
         <div data-panel="caja" hidden class="flex flex-col gap-4">
-          <h3 tabindex="-1" class="text-[30px] leading-tight">Caja de la suerte</h3>
-          <p>Elige una caja. Dentro hay un mochi y un mini reto. No hay vuelta atrás.</p>
-          <div class="grid grid-cols-3 gap-3 pt-24 sm:gap-6 sm:pt-28">
+          <h3 tabindex="-1" class="sr-only">Caja de la suerte</h3>
+          <p class="text-[15px]">Elige una caja. Dentro hay un mochi y un mini reto. No hay vuelta atrás.</p>
+          <div class="mx-auto grid w-[min(100%,max(280px,calc((100svh-330px)*1.6)))] grid-cols-3 gap-3 pt-[clamp(64px,14svh,120px)] sm:gap-6">
             {cajas.map((c, i) => (
               <button type="button" data-caja={i} class="caja group relative flex flex-col items-center" aria-label={`Caja ${i + 1}`}>
                 <span class="caja-mochi pointer-events-none absolute bottom-[30%] left-1/2 w-[70%] -translate-x-1/2 opacity-0" aria-hidden="true">
-                  <svg viewBox="0 0 240 280" class="h-auto w-full"><use data-caja-mascota href="#m1" width="240" height="280" /></svg>
+                  <svg viewBox="0 0 240 280" class="h-auto w-full overflow-visible"><use data-caja-mascota href="#s-fresa" width="240" height="280" /></svg>
                 </span>
                 <span class:list={['caja-tapa relative z-10 block h-[22%] min-h-6 w-[108%] rounded-xl border-[3px] border-tinta', c.cinta]}></span>
                 <span class:list={['caja-cuerpo relative z-10 -mt-[3px] flex aspect-square w-full items-center justify-center rounded-b-2xl border-[3px] border-tinta shadow-pop', c.color]}>
@@ -127,8 +127,8 @@ const cajas = [
               </button>
             ))}
           </div>
-          <div class="flex flex-wrap gap-3">
-            <button type="button" data-otra-caja hidden class="btn bg-blanco">Probar otra vez</button>
+          <div class="flex justify-center">
+            <button type="button" data-otra-caja hidden class="btn bg-blanco !min-h-[44px] !py-2 !text-base !shadow-pop-sm">Probar otra vez</button>
           </div>
           <div data-resultado hidden></div>
         </div>
@@ -139,12 +139,13 @@ const cajas = [
   <!-- Plantilla del resultado, se rellena desde TypeScript -->
   <template id="plantilla-resultado">
     <div class="resultado-pop mt-2 flex flex-wrap items-center gap-5 rounded-3xl border-[3px] border-tinta p-5 shadow-pop">
-      <svg viewBox="0 0 240 280" width="110" height="128" aria-hidden="true"><use data-res-mascota href="#m1" width="240" height="280" /></svg>
+      <svg viewBox="0 0 240 280" width="110" height="128" class="overflow-visible" aria-hidden="true"><g data-res-anim class="anim-respira"><use data-res-mascota href="#s-fresa" width="240" height="280" /></g></svg>
       <div class="flex min-w-[200px] flex-1 flex-col gap-2">
         <p data-res-titulo tabindex="-1" class="text-[26px] leading-tight"></p>
         <p data-res-detalle></p>
+        <p data-res-aviso class="min-h-[1.4em] text-[14px]" aria-live="polite"></p>
         <div class="flex flex-wrap gap-3 pt-1">
-          <a data-res-cta class="btn bg-oro" href="#pedido">Pedir este mochi</a>
+          <button data-res-cta type="button" class="btn bg-oro">Compartir mi resultado</button>
           <button data-res-otra type="button" class="btn bg-blanco">Girar otra vez</button>
         </div>
       </div>

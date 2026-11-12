@@ -3,7 +3,7 @@
  * - Personajes [data-camina="izq|der"]: entran desde el borde de la página dando saltitos.
  * - Títulos, tarjetas y botones: caen y rebotan (aplastar y estirar).
  * - Párrafos: suben suave.
- * Todo arranca cuando la pantalla de carga avisa con el evento "holy:listo".
+ * Todo arranca con el evento "holy:listo" (lo lanza Entradas.astro al cargar).
  */
 
 const SALTA = 'main section :is(h1, h2, h3), main section li, main section details, main section .btn, #pedido h2, #pedido .btn';

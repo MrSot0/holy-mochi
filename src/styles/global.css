@@ -124,18 +124,6 @@
 /* ───── Entradas (las controla src/scripts/entradas.ts) ───── */
 .anim .e-espera { opacity: 0; }
 
-/* ───── Pantalla de carga ───── */
-.cargador { display: none; transition: opacity .45s ease, transform .45s ease; }
-.anim .cargador { display: grid; animation: cargador-fuera .4s 6s forwards; }
-.cargador.fuera { opacity: 0; transform: scale(1.06); pointer-events: none; }
-.cargador-camina { animation: cargador-cruza 2.2s linear infinite alternate; }
-.cargador-salto { transform-origin: 50% 100%; animation: cargador-salto .32s ease-in-out infinite alternate; }
-.cargador-barra { width: 0; animation: cargador-llena 1.3s cubic-bezier(.3,.7,.3,1) forwards; }
-@keyframes cargador-cruza { from { left: 0; } to { left: calc(100% - 76px); } }
-@keyframes cargador-salto { from { transform: translateY(0) scale(1.1, .88); } to { transform: translateY(-30px) scale(.94, 1.08); } }
-@keyframes cargador-llena { to { width: 100%; } }
-@keyframes cargador-fuera { to { opacity: 0; visibility: hidden; } }
-
 /* ───── Memoria picante ───── */
 .carta {
   position: relative; aspect-ratio: 3 / 4; border: 0; padding: 0; background: none; cursor: pointer;
@@ -146,7 +134,7 @@
   position: absolute; inset: 0; display: grid; place-items: center; padding: 6px; text-align: center;
   border: 3px solid var(--color-tinta); border-radius: 16px; box-shadow: var(--shadow-pop-sm);
   backface-visibility: hidden; transition: transform .45s cubic-bezier(.4,1.4,.5,1);
-  font-size: clamp(11px, 3vw, 20px); line-height: 1.1; overflow-wrap: anywhere;
+  padding: 4px;
 }
 .carta-dorso { background: var(--color-fresa-fuerte); background-image: radial-gradient(rgb(58 31 61 / .16) 2px, transparent 2.6px); background-size: 14px 14px; }
 .carta-frente { transform: rotateY(180deg); }
@@ -185,3 +173,5 @@
   .caja.abierta .caja-mochi { opacity: 1; transform: translate(-50%, -62%); }
   .caja.abierta .caja-tapa { opacity: 0; }
 }
+
+.carta-mochi { width: 82%; height: auto; overflow: visible; }

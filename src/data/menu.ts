@@ -1,6 +1,9 @@
+import type { SaborId } from './mochis';
+
 export type Nivel = 1 | 2 | 3 | 4;
 
 export interface Sabor {
+  id: SaborId;
   nombre: string;
   descripcion: string;
   /** Llamas de picante: 0 = no pica, 4 = máximo */
@@ -14,15 +17,15 @@ export interface Sabor {
 }
 
 export const dulces: Sabor[] = [
-  { nombre: 'Fresa', descripcion: 'Fresa dulce, el clásico de siempre.', llamas: 0, fondo: 'bg-fresa', hex: '#FFD6E2', precio: '[PRECIO]' },
-  { nombre: 'Piña', descripcion: 'Piña tropical, fresca y jugosa.', llamas: 0, fondo: 'bg-pina', hex: '#FFF1A8', precio: '[PRECIO]' },
-  { nombre: 'Parchita', descripcion: 'Ácida y perfumada, pura fruta de la pasión.', llamas: 0, fondo: 'bg-parchita', hex: '#E3F2C1', precio: '[PRECIO]' },
-  { nombre: 'Mango', descripcion: 'Mango maduro, dulce y cremoso.', llamas: 0, fondo: 'bg-mango', hex: '#FFCF9E', precio: '[PRECIO]' },
+  { id: 'fresa', nombre: 'Fresa', descripcion: 'Fresa dulce, el clásico de siempre.', llamas: 0, fondo: 'bg-fresa', hex: '#FFD6E2', precio: '$1' },
+  { id: 'pina', nombre: 'Piña', descripcion: 'Piña tropical, fresca y jugosa.', llamas: 0, fondo: 'bg-pina', hex: '#FFF1A8', precio: '$1' },
+  { id: 'parchita', nombre: 'Parchita', descripcion: 'Ácida y perfumada, pura fruta de la pasión.', llamas: 0, fondo: 'bg-parchita', hex: '#E3F2C1', precio: '$1' },
+  { id: 'mango', nombre: 'Mango', descripcion: 'Mango maduro, dulce y cremoso.', llamas: 0, fondo: 'bg-mango', hex: '#FFCF9E', precio: '$1' },
 ];
 
 export const picantes: Sabor[] = [
-  { nombre: 'Tabasco', descripcion: 'Calor rápido y ácido que sube de golpe.', llamas: 3, fondo: 'bg-tabasco', hex: '#FFB4A6', precio: '[PRECIO]', mascota: 3 },
-  { nombre: 'Cayena', descripcion: 'El más picante de la carta. Ten agua cerca.', llamas: 4, fondo: 'bg-cayena', hex: '#FF9D8C', precio: '[PRECIO]', mascota: 4 },
+  { id: 'tabasco', nombre: 'Tabasco', descripcion: 'Calor rápido y ácido que sube de golpe.', llamas: 3, fondo: 'bg-tabasco', hex: '#FFB4A6', precio: '$1', mascota: 3 },
+  { id: 'cayena', nombre: 'Cayena', descripcion: 'El más picante de la carta. Ten agua cerca.', llamas: 4, fondo: 'bg-cayena', hex: '#FF9D8C', precio: '$1', mascota: 4 },
 ];
 
 export const todos: Sabor[] = [...dulces, ...picantes];
@@ -49,9 +52,10 @@ export const nivelesMascota: { nivel: Nivel; nombre: string; gesto: string; fond
 
 export const preguntas: { pregunta: string; respuesta: string }[] = [
   { pregunta: '¿Qué tan picante es de verdad?', respuesta: 'Fresa, piña, parchita y mango no pican nada. Tabasco es nivel 3 y Cayena nivel 4, el máximo.' },
-  { pregunta: '¿Cómo hago un pedido?', respuesta: 'Escríbenos por WhatsApp con tus sabores. [PEDIDO MÍNIMO Y ANTELACIÓN]' },
-  { pregunta: '¿Hacen envíos?', respuesta: '[ZONAS DE ENTREGA, COSTE Y DÍAS]' },
+  { pregunta: '¿Cuánto cuestan?', respuesta: 'Todos a $1, dulces y picantes. El valor de aguantar la Cayena no tiene precio.' },
+  { pregunta: '¿Cómo hago un pedido?', respuesta: 'Escríbenos por mensaje directo en Instagram a [@USUARIO] con tus sabores. [PEDIDO MÍNIMO Y ANTELACIÓN]' },
+  { pregunta: '¿Hacen envíos?', respuesta: '[ZONAS DE MARACAIBO, COSTE Y DÍAS DE ENTREGA]' },
   { pregunta: '¿Cuánto duran y cómo se guardan?', respuesta: '[CONSERVACIÓN Y CADUCIDAD]' },
   { pregunta: '¿Tienen información de alérgenos?', respuesta: '[ALÉRGENOS]' },
-  { pregunta: '¿Qué gano si completo un reto?', respuesta: '[PREMIO Y CÓMO SE RECLAMA]' },
+  { pregunta: '¿Qué gano si completo un reto?', respuesta: 'Un mochi gratis. Comparte tu video o tu resultado de la ruleta en redes, etiquétanos y te lo regalamos. Mira cómo al final de la página.' },
 ];

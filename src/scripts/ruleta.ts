@@ -1,5 +1,6 @@
-import { enlaceWhatsApp } from '../data/site';
+import { compartir } from '../data/site';
 import { todos, type Sabor } from '../data/menu';
+import { animacionSabor, svgCompleto } from '../data/mochis';
 
 type Juego = 'atrapa' | 'memoria' | 'caja';
 const NOMBRES: Record<Juego, string> = {
@@ -19,12 +20,12 @@ const barajar = <T>(lista: T[]): T[] => {
   }
   return a;
 };
-const nivelDe = (s: Sabor) => (s.llamas >= 4 ? 4 : s.llamas >= 3 ? 3 : 1);
 const $ = <T extends Element>(root: ParentNode, sel: string) => root.querySelector<T>(sel)!;
 
 export function iniciarRuleta(): void {
   const seccion = document.getElementById('ruleta');
   if (!seccion) return;
+  const raiz: HTMLElement = seccion;
 
   const rueda = $<SVGSVGElement>(seccion, '#rueda');
   const mascotaRueda = $<SVGSVGElement>(seccion, '#rueda-mascota use');
@@ -46,19 +47,75 @@ export function iniciarRuleta(): void {
     return paneles.find((p) => p.dataset.panel === id)!;
   }
 
-  function mostrarJuego(id: Juego) {
+  const vista = $<HTMLElement>(seccion, '#vista-ruleta');
+  const chip = $<HTMLElement>(seccion, '[data-juego-actual]');
+  const volverBtn = $<HTMLButtonElement>(seccion, '[data-volver]');
+
+  const salir = (el: HTMLElement) =>
+    quieto()
+      ? Promise.resolve()
+      : el.animate(
+          [
+            { opacity: 1, transform: 'none' },
+            { opacity: 1, transform: 'translateY(-14px) scale(1.04, .96)', offset: 0.35 },
+            { opacity: 0, transform: 'translateY(50px) scale(.7)' },
+          ],
+          { duration: 380, easing: 'ease-in' },
+        ).finished.then(() => undefined);
+
+  const entrar = (el: HTMLElement) => {
+    if (quieto()) return;
+    el.animate(
+      [
+        { opacity: 0, transform: 'translateY(60px) scale(.85, 1.1)' },
+        { opacity: 1, transform: 'translateY(0) scale(1.05, .94)', offset: 0.55 },
+        { transform: 'translateY(-8px) scale(.98, 1.02)', offset: 0.78 },
+        { opacity: 1, transform: 'none' },
+      ],
+      { duration: 620, easing: 'ease-out' },
+    );
+  };
+
+  const centrarSeccion = () => {
+    // deja el escenario justo bajo la cabecera para que el juego quepa en pantalla
+    const cabecera = document.querySelector('header')?.getBoundingClientRect().height ?? 0;
+    const top = escenario.getBoundingClientRect().top + scrollY - cabecera - 10;
+    scrollTo({ top, behavior: quieto() ? 'auto' : 'smooth' });
+  };
+
+  async function mostrarJuego(id: Juego) {
     Object.values(juegos).forEach((j) => j.detener());
+    if (!vista.hidden) {
+      await salir(vista);
+      vista.hidden = true;
+    }
     paneles.forEach((p) => (p.hidden = p.dataset.panel !== id));
     const actual = panel(id);
     actual.querySelectorAll<HTMLElement>('[data-resultado]').forEach((r) => {
       r.hidden = true;
       r.replaceChildren();
     });
+    chip.textContent = NOMBRES[id];
+    escenario.hidden = false;
+    centrarSeccion();
+    entrar(escenario);
     juegos[id].preparar();
-    const r = escenario.getBoundingClientRect();
-    if (r.top < 0 || r.top > innerHeight * 0.6) escenario.scrollIntoView({ behavior: quieto() ? 'auto' : 'smooth', block: 'start' });
     $<HTMLElement>(actual, 'h3').focus({ preventScroll: true });
   }
+
+  async function volver() {
+    Object.values(juegos).forEach((j) => j.detener());
+    if (!escenario.hidden) {
+      await salir(escenario);
+      escenario.hidden = true;
+    }
+    estado.textContent = '';
+    vista.hidden = false;
+    entrar(vista);
+    raiz.scrollIntoView({ behavior: quieto() ? 'auto' : 'smooth', block: 'start' });
+    botonGirar.focus({ preventScroll: true });
+  }
+  volverBtn.addEventListener('click', volver);
 
   function girar() {
     if (girando) return;
@@ -79,7 +136,7 @@ export function iniciarRuleta(): void {
       botonGirar.disabled = false;
       mascotaRueda.setAttribute('href', '#m1');
       estado.textContent = `¡Te tocó ${NOMBRES[juego]}!`;
-      setTimeout(() => mostrarJuego(juego), quieto() ? 0 : 450);
+      setTimeout(() => mostrarJuego(juego), quieto() ? 0 : 750);
     };
 
     if (quieto()) {
@@ -101,20 +158,18 @@ export function iniciarRuleta(): void {
     const nodo = plantilla.content.cloneNode(true) as DocumentFragment;
     const tarjeta = nodo.firstElementChild as HTMLElement;
     tarjeta.style.background = sabor.hex;
-    $<SVGUseElement>(nodo, '[data-res-mascota]').setAttribute('href', `#m${nivelDe(sabor)}`);
+    $<SVGUseElement>(nodo, '[data-res-mascota]').setAttribute('href', `#s-${sabor.id}`);
+    $<SVGGElement>(nodo, '[data-res-anim]').setAttribute('class', animacionSabor[sabor.id]);
     $<HTMLElement>(nodo, '[data-res-titulo]').textContent = titulo;
     $<HTMLElement>(nodo, '[data-res-detalle]').textContent = detalle;
-    const cta = $<HTMLAnchorElement>(nodo, '[data-res-cta]');
-    cta.textContent = `Pedir un mochi de ${sabor.nombre}`;
-    cta.href = enlaceWhatsApp(`¡Hola Holy Mochi! Jugué a "${NOMBRES[juego]}" en la web y me tocó un mochi de ${sabor.nombre}. ¡Lo quiero!`);
-    if (cta.href.startsWith('http')) {
-      cta.target = '_blank';
-      cta.rel = 'noopener';
-    }
-    $<HTMLButtonElement>(nodo, '[data-res-otra]').addEventListener('click', () => {
-      document.getElementById('ruleta')?.scrollIntoView({ behavior: quieto() ? 'auto' : 'smooth' });
-      botonGirar.focus({ preventScroll: true });
+    const aviso = $<HTMLElement>(nodo, '[data-res-aviso]');
+    $<HTMLButtonElement>(nodo, '[data-res-cta]').addEventListener('click', async () => {
+      const r = await compartir(`Jugué a "${NOMBRES[juego]}" en Holy Mochi y me tocó un mochi de ${sabor.nombre}. ¿Y a ti?`);
+      aviso.textContent =
+        r === 'copiado' ? 'Copiado. Pégalo en tus redes, etiquétanos y gana un mochi gratis.' :
+        r === 'compartido' ? '¡Compartido! Etiquétanos para reclamar tu mochi gratis.' : '';
     });
+    $<HTMLButtonElement>(nodo, '[data-res-otra]').addEventListener('click', volver);
     destino.replaceChildren(nodo);
     destino.hidden = false;
     $<HTMLElement>(destino, '[data-res-titulo]').focus({ preventScroll: true });
@@ -159,6 +214,13 @@ function juegoAtrapa(panel: HTMLElement, alResultado: AlResultado): Minijuego {
     }),
   );
 
+  const imagenes = new Map<string, HTMLImageElement>();
+  todos.forEach((s) => {
+    const img = new Image();
+    img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svgCompleto(s.id))}`;
+    imagenes.set(s.id, img);
+  });
+
   interface Cae { x: number; y: number; v: number; sabor: Sabor; giro: number }
   let W = 0, H = 0;
   let bandeja = 0.5;
@@ -192,28 +254,24 @@ function juegoAtrapa(panel: HTMLElement, alResultado: AlResultado): Minijuego {
 
   function dibujarMochi(c: Cae) {
     const r = radio();
+    const img = imagenes.get(c.sabor.id);
+    const ancho = r * 2.6, alto = ancho * (280 / 240);
     ctx.save();
     ctx.translate(c.x, c.y);
-    ctx.rotate(Math.sin(c.giro) * 0.25);
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = '#3A1F3D';
-    ctx.fillStyle = c.sabor.hex;
-    ctx.beginPath();
-    ctx.ellipse(0, 0, r * 1.1, r * 0.92, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = '#3A1F3D';
-    ctx.beginPath();
-    ctx.arc(-r * 0.35, -r * 0.1, r * 0.12, 0, Math.PI * 2);
-    ctx.arc(r * 0.35, -r * 0.1, r * 0.12, 0, Math.PI * 2);
-    ctx.fill();
-    if (c.sabor.llamas > 0) {
-      ctx.fillStyle = '#D7141F';
+    ctx.rotate(Math.sin(c.giro) * 0.22);
+    // aplastar y estirar mientras cae
+    const estira = 1 + Math.sin(c.giro * 1.7) * 0.06;
+    ctx.scale(2 - estira, estira);
+    if (img?.complete && img.naturalWidth) {
+      ctx.drawImage(img, -ancho / 2, -alto * 0.62, ancho, alto);
+    } else {
+      ctx.fillStyle = c.sabor.hex;
+      ctx.strokeStyle = '#3A1F3D';
+      ctx.lineWidth = 3;
       ctx.beginPath();
-      ctx.moveTo(0, -r * 0.95);
-      ctx.quadraticCurveTo(r * 0.45, -r * 1.3, 0, -r * 1.9);
-      ctx.quadraticCurveTo(-r * 0.45, -r * 1.3, 0, -r * 0.95);
+      ctx.ellipse(0, 0, r * 1.1, r * 0.92, 0, 0, Math.PI * 2);
       ctx.fill();
+      ctx.stroke();
     }
     ctx.restore();
   }
@@ -373,10 +431,8 @@ function juegoMemoria(panel: HTMLElement, alResultado: AlResultado): Minijuego {
       b.dataset.sabor = sabor.nombre;
       b.setAttribute('aria-label', `Carta ${i + 1}, boca abajo`);
       b.style.setProperty('--retraso', `${i * 45}ms`);
-      b.innerHTML = `<span class="carta-cara carta-dorso" aria-hidden="true"><svg viewBox="0 0 40 56" width="22" height="31"><use href="#llama"/></svg></span><span class="carta-cara carta-frente" aria-hidden="true"></span>`;
-      const frente = b.querySelector<HTMLElement>('.carta-frente')!;
-      frente.style.background = sabor.hex;
-      frente.textContent = sabor.nombre;
+      b.innerHTML = `<span class="carta-cara carta-dorso" aria-hidden="true"><svg viewBox="0 0 40 56" width="22" height="31"><use href="#llama"/></svg></span><span class="carta-cara carta-frente" aria-hidden="true"><svg viewBox="-10 -10 260 300" class="carta-mochi"><g class="${animacionSabor[sabor.id]}"><use href="#s-${sabor.id}" width="240" height="280"/></g></svg></span>`;
+      b.querySelector<HTMLElement>('.carta-frente')!.style.background = sabor.hex;
       b.addEventListener('click', () => voltear(b, sabor, i));
       return b;
     });
@@ -455,7 +511,7 @@ function juegoCaja(panel: HTMLElement, alResultado: AlResultado): Minijuego {
     b.addEventListener('click', () => {
       const sabor = azar(todos);
       const reto = azar(minirretos);
-      b.querySelector('[data-caja-mascota]')!.setAttribute('href', `#m${nivelDe(sabor)}`);
+      b.querySelector('[data-caja-mascota]')!.setAttribute('href', `#s-${sabor.id}`);
       botones.forEach((x) => {
         x.disabled = true;
         x.classList.add(x === b ? 'abierta' : 'descartada');

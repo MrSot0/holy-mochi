@@ -1,5 +1,5 @@
 ---
-import Mascota from './Mascota.astro';
+import MochiSabor from './MochiSabor.astro';
 import Llamas from './Llamas.astro';
 import { dulces, picantes } from '../data/menu';
 ---
@@ -7,13 +7,14 @@ import { dulces, picantes } from '../data/menu';
   <div class="contenedor flex flex-col gap-10">
     <div class="flex flex-wrap items-end justify-between gap-4">
       <h2 id="sabores-titulo" class="font-display text-[clamp(40px,6vw,76px)] leading-none">Los sabores</h2>
-      <p class="max-w-[24em] rounded-2xl border-[3px] border-tinta bg-blanco px-3.5 py-2.5">Precio por unidad. Las llamas marcan el nivel de picante.</p>
+      <p class="max-w-[24em] rounded-2xl border-[3px] border-tinta bg-blanco px-3.5 py-2.5">Todos a $1 la unidad. Las llamas marcan el nivel de picante.</p>
     </div>
 
     <h3 class="font-display text-[32px]">Dulces <span class="text-[22px]" lang="ja">甘</span></h3>
-    <ul class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5">
+    <ul class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-x-5 gap-y-16 pt-10">
       {dulces.map((s) => (
         <li class:list={['flex flex-col gap-2 rounded-[28px] border-[3px] border-tinta p-6 shadow-pop-lg', s.fondo]}>
+          <MochiSabor id={s.id} ancho={96} class="-mt-14 mb-1 self-center" />
           <h4 class="font-display text-[28px] leading-tight">{s.nombre}</h4>
           <p>{s.descripcion}</p>
           <div class="mt-auto flex justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
@@ -28,7 +29,7 @@ import { dulces, picantes } from '../data/menu';
     <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5">
       {picantes.map((s) => (
         <li class:list={['flex flex-wrap items-center gap-5 rounded-[28px] border-[3px] border-tinta p-6 shadow-pop-lg', s.fondo]}>
-          {s.mascota && <Mascota nivel={s.mascota} ancho={120} camina="izq" />}
+          <MochiSabor id={s.id} ancho={120} camina="izq" />
           <div class="flex min-w-[200px] flex-1 flex-col gap-2">
             <h4 class="font-display text-[30px] leading-tight">{s.nombre}</h4>
             <p>{s.descripcion}</p>

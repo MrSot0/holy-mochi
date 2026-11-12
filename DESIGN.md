@@ -90,8 +90,6 @@ Escala de 4px (Tailwind por defecto). Secciones: `clamp(64px, 10vw, 128px)` vert
 
 ## Movimiento
 
-- **Pantalla de carga** (`Cargador.astro`): la mascota cruza la barra a saltitos
-  mientras se llena; mínimo 1,3 s y se quita sola a los 6 s pase lo que pase.
 - **Personajes que caminan** (`data-camina="izq|der"`): entran desde el borde de
   la página dando saltos (se estiran en el aire, se aplastan al aterrizar) y
   rematan con un rebote. Lo calcula `src/scripts/entradas.ts` con la distancia real.
@@ -100,14 +98,32 @@ Escala de 4px (Tailwind por defecto). Secciones: `clamp(64px, 10vw, 128px)` vert
 - **Mascotas**: respiran, tiemblan, gotean, echan humo y ríen según su nivel.
 - **Ruleta**: 5 vueltas con frenada; cartas que se reparten y giran en 3D;
   cajas que tiemblan y sueltan la tapa.
-- Con `prefers-reduced-motion: reduce` no hay pantalla de carga ni entradas y todo
-  aparece en su sitio.
+- Con `prefers-reduced-motion: reduce` no hay entradas y todo aparece en su sitio.
 
 ## Ruleta del reto
 
 Tres minijuegos (`src/scripts/ruleta.ts`), cada uno termina en un sabor concreto
-y un botón "Pedir un mochi de X" que abre WhatsApp con el mensaje escrito:
+y un botón "Compartir mi resultado" (menú nativo o copiar). La ruleta aparece sola y
+centrada; al elegir juego sale con un salto y entra el escenario con "Volver a la ruleta".
+Canvas, tablero y cajas se dimensionan con `100svh` para caber en la pantalla:
 
 1. **Atrapa el mochi**: 20 s, bandeja con dedo, ratón o flechas. Los picantes valen más.
 2. **Memoria picante**: 6 parejas; la primera pareja es tu sabor estrella.
 3. **Caja de la suerte**: 3 cajas; sale un sabor y un mini reto.
+
+## Mochis por sabor
+
+`src/data/mochis.ts` define un mochi por sabor con el cuerpo del color de su fruta y la
+fruta encima (fresa, corona de piña, media parchita, mango, ají tabasco, cayena con
+cuernos). Se usan en la carta, la memoria, el canvas de Atrapa el mochi y los resultados.
+Las mascotas de nivel (m1–m4) siguen para los niveles y la acompañante.
+
+## Acompañante
+
+Comentarios sarcásticos por sección en `src/scripts/acompanante.ts` (`COMENTARIOS`).
+El globo dura según el largo del chiste y cambia cada ~10 s.
+
+## Imagen para compartir
+
+`public/og.png` (1200×630) se genera con `npm run og`. Cambia `site` en
+`astro.config.mjs` por el dominio real para que la URL de la imagen sea correcta.

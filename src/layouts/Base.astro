@@ -1,13 +1,15 @@
 ---
 import '../styles/global.css';
 import SpriteMascota from '../components/SpriteMascota.astro';
-import Cargador from '../components/Cargador.astro';
+import Entradas from '../components/Entradas.astro';
 
 interface Props {
   titulo: string;
   descripcion: string;
 }
 const { titulo, descripcion } = Astro.props;
+const canonica = new URL(Astro.url.pathname, Astro.site);
+const ogImagen = new URL('/og.png', Astro.site);
 ---
 <!doctype html>
 <html lang="es">
@@ -19,6 +21,18 @@ const { titulo, descripcion } = Astro.props;
     <meta property="og:title" content={titulo} />
     <meta property="og:description" content={descripcion} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonica} />
+    <meta property="og:locale" content="es_VE" />
+    <meta property="og:site_name" content="Holy Mochi" />
+    <meta property="og:image" content={ogImagen} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Holy Mochi: mochis que pican y mochis que retan en Maracaibo. La mascota malvada y los seis sabores." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={titulo} />
+    <meta name="twitter:description" content={descripcion} />
+    <meta name="twitter:image" content={ogImagen} />
+    <link rel="canonical" href={canonica} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,7 +43,7 @@ const { titulo, descripcion } = Astro.props;
   <body>
     <a href="#contenido" class="sr-only z-50 rounded-full border-[3px] border-tinta bg-oro px-4 py-2 font-bold focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Saltar al contenido</a>
     <SpriteMascota />
-    <Cargador />
     <slot />
+    <Entradas />
   </body>
 </html>

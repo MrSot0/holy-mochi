@@ -1,0 +1,6 @@
+<script>
+  // Animaciones de entrada: arrancan en cuanto la página está lista.
+  import { iniciarEntradas } from '../scripts/entradas';
+  iniciarEntradas();
+  requestAnimationFrame(() => window.dispatchEvent(new Event('holy:listo')));
+</script>
