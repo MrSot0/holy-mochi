@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SpriteMascota from '../components/SpriteMascota.astro';
+import Cargador from '../components/Cargador.astro';
 
 interface Props {
   titulo: string;
@@ -21,12 +22,14 @@ const { titulo, descripcion } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet" />
     <title>{titulo}</title>
+    <script is:inline>if(!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("anim")</script>
   </head>
   <body>
     <a href="#contenido" class="sr-only z-50 rounded-full border-[3px] border-tinta bg-oro px-4 py-2 font-bold focus:not-sr-only focus:fixed focus:top-3 focus:left-3">Saltar al contenido</a>
     <SpriteMascota />
+    <Cargador />
     <slot />
   </body>
 </html>

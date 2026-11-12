@@ -28,7 +28,7 @@ import { dulces, picantes } from '../data/menu';
     <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5">
       {picantes.map((s) => (
         <li class:list={['flex flex-wrap items-center gap-5 rounded-[28px] border-[3px] border-tinta p-6 shadow-pop-lg', s.fondo]}>
-          {s.mascota && <Mascota nivel={s.mascota} ancho={120} />}
+          {s.mascota && <Mascota nivel={s.mascota} ancho={120} camina="izq" />}
           <div class="flex min-w-[200px] flex-1 flex-col gap-2">
             <h4 class="font-display text-[30px] leading-tight">{s.nombre}</h4>
             <p>{s.descripcion}</p>

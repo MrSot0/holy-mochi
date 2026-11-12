@@ -20,7 +20,7 @@
   --color-cielo: #D4E6FF;
 
   --font-display: "Bagel Fat One", "Arial Rounded MT Bold", system-ui, sans-serif;
-  --font-sans: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Bagel Fat One", "Arial Rounded MT Bold", system-ui, sans-serif;
 
   --shadow-pop-sm: 3px 3px 0 var(--color-tinta);
   --shadow-pop: 5px 5px 0 var(--color-tinta);
@@ -35,8 +35,13 @@
   body {
     @apply bg-arroz text-tinta font-sans antialiased;
     font-size: 17px;
-    line-height: 1.55;
+    line-height: 1.6;
+    letter-spacing: .012em;
+    font-synthesis: none;
+    overflow-x: hidden;
+    overflow-x: clip;
   }
+  h1, h2, h3, h4 { font-weight: 400; letter-spacing: 0; }
   h1, h2, h3, h4 { text-wrap: balance; }
   :focus-visible {
     outline: 3px solid var(--color-tinta);
@@ -114,4 +119,69 @@
 
 @media (prefers-reduced-motion: reduce) {
   .anim-respira, .anim-tiembla, .anim-tiembla-rapido, .anim-risa, .fl, .dr, .rs, .hf, .llama-icono, .marquesina { animation: none; }
+}
+
+/* ───── Entradas (las controla src/scripts/entradas.ts) ───── */
+.anim .e-espera { opacity: 0; }
+
+/* ───── Pantalla de carga ───── */
+.cargador { display: none; transition: opacity .45s ease, transform .45s ease; }
+.anim .cargador { display: grid; animation: cargador-fuera .4s 6s forwards; }
+.cargador.fuera { opacity: 0; transform: scale(1.06); pointer-events: none; }
+.cargador-camina { animation: cargador-cruza 2.2s linear infinite alternate; }
+.cargador-salto { transform-origin: 50% 100%; animation: cargador-salto .32s ease-in-out infinite alternate; }
+.cargador-barra { width: 0; animation: cargador-llena 1.3s cubic-bezier(.3,.7,.3,1) forwards; }
+@keyframes cargador-cruza { from { left: 0; } to { left: calc(100% - 76px); } }
+@keyframes cargador-salto { from { transform: translateY(0) scale(1.1, .88); } to { transform: translateY(-30px) scale(.94, 1.08); } }
+@keyframes cargador-llena { to { width: 100%; } }
+@keyframes cargador-fuera { to { opacity: 0; visibility: hidden; } }
+
+/* ───── Memoria picante ───── */
+.carta {
+  position: relative; aspect-ratio: 3 / 4; border: 0; padding: 0; background: none; cursor: pointer;
+  perspective: 700px; border-radius: 16px;
+  animation: carta-reparte .5s cubic-bezier(.3,1.5,.5,1) var(--retraso, 0ms) backwards;
+}
+.carta-cara {
+  position: absolute; inset: 0; display: grid; place-items: center; padding: 6px; text-align: center;
+  border: 3px solid var(--color-tinta); border-radius: 16px; box-shadow: var(--shadow-pop-sm);
+  backface-visibility: hidden; transition: transform .45s cubic-bezier(.4,1.4,.5,1);
+  font-size: clamp(11px, 3vw, 20px); line-height: 1.1; overflow-wrap: anywhere;
+}
+.carta-dorso { background: var(--color-fresa-fuerte); background-image: radial-gradient(rgb(58 31 61 / .16) 2px, transparent 2.6px); background-size: 14px 14px; }
+.carta-frente { transform: rotateY(180deg); }
+.carta.abierta .carta-dorso { transform: rotateY(-180deg); }
+.carta.abierta .carta-frente { transform: rotateY(0); }
+.carta.pareja .carta-frente { animation: carta-pareja .5s ease-out; }
+.carta:hover:not(.abierta) .carta-dorso { transform: translateY(-4px) rotate(-2deg); }
+@keyframes carta-reparte { from { opacity: 0; transform: translateY(-50px) rotate(-10deg) scale(.8); } }
+@keyframes carta-pareja { 40% { transform: scale(1.12, .9); } 70% { transform: scale(.96, 1.06) translateY(-6px); } }
+
+/* ───── Caja de la suerte ───── */
+.caja { border: 0; padding: 0; background: none; cursor: pointer; transition: opacity .3s, transform .3s; }
+.caja:not(:disabled) .caja-cuerpo, .caja:not(:disabled) .caja-tapa { animation: caja-sacude 2.4s ease-in-out infinite; }
+.caja:nth-child(2) .caja-cuerpo, .caja:nth-child(2) .caja-tapa { animation-delay: .4s; }
+.caja:nth-child(3) .caja-cuerpo, .caja:nth-child(3) .caja-tapa { animation-delay: .8s; }
+.caja:hover:not(:disabled) .caja-tapa { transform: translateY(-8px) rotate(-4deg); animation: none; }
+.caja-tapa { transition: transform .2s; }
+.caja.abierta .caja-tapa { animation: tapa-vuela .6s ease-in forwards; }
+.caja.abierta .caja-mochi { animation: mochi-sale 1s .2s cubic-bezier(.3,1.4,.5,1) forwards; }
+.caja.descartada { opacity: .35; transform: scale(.9); }
+@keyframes caja-sacude { 0%, 70%, 100% { transform: rotate(0); } 75% { transform: rotate(-4deg); } 80% { transform: rotate(4deg); } 85% { transform: rotate(-3deg); } 90% { transform: rotate(2deg); } }
+@keyframes tapa-vuela { 30% { transform: translateY(-30px) rotate(-8deg); } 100% { transform: translate(-40%, -160%) rotate(-40deg); opacity: 0; } }
+@keyframes mochi-sale {
+  0% { opacity: 0; transform: translate(-50%, 30%) scale(.5); }
+  35% { opacity: 1; transform: translate(-50%, -95%) scale(.95, 1.08); }
+  55% { transform: translate(-50%, -70%) scale(1.08, .92); }
+  75% { transform: translate(-50%, -85%) scale(.98, 1.03); }
+  100% { opacity: 1; transform: translate(-50%, -62%) scale(1); }
+}
+
+.resultado-pop { animation: resultado-pop .6s cubic-bezier(.3,1.5,.5,1); }
+@keyframes resultado-pop { from { opacity: 0; transform: translateY(24px) scale(.9, 1.1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .carta, .carta-cara, .caja, .caja-cuerpo, .caja-tapa, .caja-mochi, .resultado-pop { animation: none !important; transition: none !important; }
+  .caja.abierta .caja-mochi { opacity: 1; transform: translate(-50%, -62%); }
+  .caja.abierta .caja-tapa { opacity: 0; }
 }

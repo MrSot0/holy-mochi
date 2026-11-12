@@ -8,9 +8,11 @@ interface Props {
   /** Si se pasa, la mascota se anuncia como imagen; si no, es decorativa. */
   etiqueta?: string;
   class?: string;
+  /** Entra caminando a saltitos desde ese borde de la página */
+  camina?: 'izq' | 'der';
 }
 
-const { nivel, ancho = 120, etiqueta, class: clase = '' } = Astro.props;
+const { nivel, ancho = 120, etiqueta, class: clase = '', camina } = Astro.props;
 
 const animacion: Record<Nivel, string> = {
   1: 'anim-respira',
@@ -27,6 +29,7 @@ const alto = Math.round((ancho * 280) / 240);
   class:list={['max-w-full h-auto', clase]}
   {...(etiqueta ? { role: 'img', 'aria-label': etiqueta } : { 'aria-hidden': 'true' })}
   focusable="false"
+  data-camina={camina}
 >
   <g class={animacion[nivel]}><use href={`#m${nivel}`} width="240" height="280" /></g>
 </svg>

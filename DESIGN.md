@@ -38,8 +38,9 @@ Contraste: tinta sobre cualquier pastel ≥ 7:1.
 
 ## Tipografía
 
-- Display: **Bagel Fat One** 400 — títulos, números, precios grandes, marquesina.
-- Texto: **Figtree** 400 / 600 / 700.
+- **Bagel Fat One** 400 en toda la página: títulos, texto, botones y juegos.
+  Una sola familia y un solo peso (`font-synthesis: none`, sin negritas falsas).
+  El texto corrido lleva interlineado 1.6 y tracking .012em para leerse bien.
 
 | Paso   | Tamaño                    | Interlineado | Uso |
 |--------|---------------------------|--------------|-----|
@@ -89,5 +90,24 @@ Escala de 4px (Tailwind por defecto). Secciones: `clamp(64px, 10vw, 128px)` vert
 
 ## Movimiento
 
-Respiración, temblor, goteo, humo y llamas. Todo se apaga con
-`prefers-reduced-motion: reduce`.
+- **Pantalla de carga** (`Cargador.astro`): la mascota cruza la barra a saltitos
+  mientras se llena; mínimo 1,3 s y se quita sola a los 6 s pase lo que pase.
+- **Personajes que caminan** (`data-camina="izq|der"`): entran desde el borde de
+  la página dando saltos (se estiran en el aire, se aplastan al aterrizar) y
+  rematan con un rebote. Lo calcula `src/scripts/entradas.ts` con la distancia real.
+- **Títulos, tarjetas y botones**: caen y rebotan con aplastar y estirar,
+  escalonados entre hermanos. **Párrafos**: suben suave.
+- **Mascotas**: respiran, tiemblan, gotean, echan humo y ríen según su nivel.
+- **Ruleta**: 5 vueltas con frenada; cartas que se reparten y giran en 3D;
+  cajas que tiemblan y sueltan la tapa.
+- Con `prefers-reduced-motion: reduce` no hay pantalla de carga ni entradas y todo
+  aparece en su sitio.
+
+## Ruleta del reto
+
+Tres minijuegos (`src/scripts/ruleta.ts`), cada uno termina en un sabor concreto
+y un botón "Pedir un mochi de X" que abre WhatsApp con el mensaje escrito:
+
+1. **Atrapa el mochi**: 20 s, bandeja con dedo, ratón o flechas. Los picantes valen más.
+2. **Memoria picante**: 6 parejas; la primera pareja es tu sabor estrella.
+3. **Caja de la suerte**: 3 cajas; sale un sabor y un mini reto.

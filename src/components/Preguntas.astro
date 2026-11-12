@@ -6,7 +6,7 @@ import { preguntas } from '../data/menu';
   <div class="contenedor flex flex-wrap gap-12">
     <div class="flex flex-[1_1_320px] flex-col items-start gap-5">
       <h2 id="preguntas-titulo" class="font-display text-[clamp(40px,6vw,68px)] leading-none">¿Dudas antes de enchilarte?</h2>
-      <Mascota nivel={2} ancho={170} />
+      <Mascota nivel={2} ancho={170} camina="izq" />
     </div>
     <div class="flex min-w-0 flex-[999_1_520px] flex-col gap-3.5" data-acordeon>
       {preguntas.map((p, i) => (

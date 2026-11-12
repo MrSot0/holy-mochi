@@ -7,21 +7,25 @@ export interface Sabor {
   llamas: 0 | 1 | 2 | 3 | 4;
   /** Clase de fondo pastel (token de Tailwind) */
   fondo: string;
+  /** Mismo color en hex, para el canvas de los minijuegos */
+  hex: string;
   precio: string;
   mascota?: Nivel;
 }
 
 export const dulces: Sabor[] = [
-  { nombre: 'Fresa', descripcion: 'Fresa dulce, el clásico de siempre.', llamas: 0, fondo: 'bg-fresa', precio: '[PRECIO]' },
-  { nombre: 'Piña', descripcion: 'Piña tropical, fresca y jugosa.', llamas: 0, fondo: 'bg-pina', precio: '[PRECIO]' },
-  { nombre: 'Parchita', descripcion: 'Ácida y perfumada, pura fruta de la pasión.', llamas: 0, fondo: 'bg-parchita', precio: '[PRECIO]' },
-  { nombre: 'Mango', descripcion: 'Mango maduro, dulce y cremoso.', llamas: 0, fondo: 'bg-mango', precio: '[PRECIO]' },
+  { nombre: 'Fresa', descripcion: 'Fresa dulce, el clásico de siempre.', llamas: 0, fondo: 'bg-fresa', hex: '#FFD6E2', precio: '[PRECIO]' },
+  { nombre: 'Piña', descripcion: 'Piña tropical, fresca y jugosa.', llamas: 0, fondo: 'bg-pina', hex: '#FFF1A8', precio: '[PRECIO]' },
+  { nombre: 'Parchita', descripcion: 'Ácida y perfumada, pura fruta de la pasión.', llamas: 0, fondo: 'bg-parchita', hex: '#E3F2C1', precio: '[PRECIO]' },
+  { nombre: 'Mango', descripcion: 'Mango maduro, dulce y cremoso.', llamas: 0, fondo: 'bg-mango', hex: '#FFCF9E', precio: '[PRECIO]' },
 ];
 
 export const picantes: Sabor[] = [
-  { nombre: 'Tabasco', descripcion: 'Calor rápido y ácido que sube de golpe.', llamas: 3, fondo: 'bg-tabasco', precio: '[PRECIO]', mascota: 3 },
-  { nombre: 'Cayena', descripcion: 'El más picante de la carta. Ten agua cerca.', llamas: 4, fondo: 'bg-cayena', precio: '[PRECIO]', mascota: 4 },
+  { nombre: 'Tabasco', descripcion: 'Calor rápido y ácido que sube de golpe.', llamas: 3, fondo: 'bg-tabasco', hex: '#FFB4A6', precio: '[PRECIO]', mascota: 3 },
+  { nombre: 'Cayena', descripcion: 'El más picante de la carta. Ten agua cerca.', llamas: 4, fondo: 'bg-cayena', hex: '#FF9D8C', precio: '[PRECIO]', mascota: 4 },
 ];
+
+export const todos: Sabor[] = [...dulces, ...picantes];
 
 export interface Reto {
   nombre: string;

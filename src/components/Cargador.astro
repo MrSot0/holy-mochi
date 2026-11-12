@@ -1,0 +1,45 @@
+---
+/* Pantalla de carga: la mascota cruza la barra a saltitos mientras carga la página. */
+---
+<div id="cargador" class="cargador fixed inset-0 z-[60] place-items-center bg-pina bg-lunares" role="status" aria-label="Cargando Holy Mochi">
+  <div class="flex w-[min(440px,82vw)] flex-col items-center gap-5">
+    <div class="relative h-[110px] w-full">
+      <div class="cargador-camina absolute bottom-0 left-0 w-[76px]">
+        <svg viewBox="0 0 240 280" class="cargador-salto block h-auto w-full" aria-hidden="true"><use href="#m1" width="240" height="280" /></svg>
+      </div>
+    </div>
+    <div class="h-6 w-full overflow-hidden rounded-full border-[3px] border-tinta bg-blanco shadow-pop-sm">
+      <div class="cargador-barra h-full rounded-full bg-fresa-fuerte"></div>
+    </div>
+    <p class="text-[22px]">Amasando mochis…</p>
+  </div>
+</div>
+
+<script>
+  import { iniciarEntradas } from '../scripts/entradas';
+
+  iniciarEntradas();
+  const cargador = document.getElementById('cargador');
+  const inicio = performance.now();
+  const MINIMO = 1300;
+
+  const ocultar = () => {
+    const espera = Math.max(0, MINIMO - (performance.now() - inicio));
+    setTimeout(() => {
+      cargador?.classList.add('fuera');
+      setTimeout(() => {
+        cargador?.remove();
+        window.dispatchEvent(new Event('holy:listo'));
+      }, 450);
+    }, espera);
+  };
+
+  if (!document.documentElement.classList.contains('anim')) {
+    cargador?.remove();
+    window.dispatchEvent(new Event('holy:listo'));
+  } else if (document.readyState === 'complete') {
+    ocultar();
+  } else {
+    window.addEventListener('load', ocultar, { once: true });
+  }
+</script>

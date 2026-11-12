@@ -19,6 +19,8 @@ export function iniciarAcompanante(): void {
       }
     }
     if (mejor?.dataset.nivel) acompanante.dataset.nivel = mejor.dataset.nivel;
+    // En la ruleta se aparta para no tapar los juegos
+    acompanante.classList.toggle('apartado', mejor?.id === 'ruleta');
   };
 
   const observador = new IntersectionObserver(
