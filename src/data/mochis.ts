@@ -59,10 +59,21 @@ const mangoDetalle =
   `<path d="M126 84C126 72 130 64 136 60" fill="none" stroke="#7A5230" stroke-width="7" stroke-linecap="round"/>` +
   `<path d="M135 61C146 46 166 44 176 51C166 64 148 66 135 61Z" fill="${HOJA}" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>`;
 
-const tabasco =
-  `<path d="M116 98C106 78 110 54 126 44C134 40 140 46 136 54C126 66 126 82 126 98Z" fill="#D7141F" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
-  `<path d="M128 44C130 34 138 28 146 28" fill="none" stroke="${HOJA}" stroke-width="7" stroke-linecap="round"/>` +
-  `<path d="M118 70C118 62 120 56 124 52" fill="none" stroke="#FF8A8A" stroke-width="4" stroke-linecap="round"/>`;
+/* Tabasco: el mochi es el ají. Piel roja brillante, punta curvada, cáliz verde y tallo */
+const tabascoDefs =
+  `<defs><linearGradient id="hm-tabasco" x1="0" y1="0" x2=".8" y2="1">` +
+  `<stop offset="0" stop-color="#FF6A3D"/><stop offset=".5" stop-color="#E8231B"/><stop offset="1" stop-color="#A80F14"/>` +
+  `</linearGradient></defs>`;
+// la punta va detrás del cuerpo para que no se vea la unión
+const tabascoPunta = `<path d="M150 228C168 236 178 248 172 262C164 256 150 248 132 236Z" fill="#A80F14" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>`;
+const tabascoBrillo =
+  `<path d="M58 150C60 124 76 106 96 98" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" opacity=".55"/>` +
+  `<circle cx="104" cy="96" r="4.5" fill="#fff" opacity=".55"/>`;
+const tabascoCaliz =
+  `<path d="M84 94C92 76 108 70 120 72C132 70 148 76 156 94C146 90 134 92 128 98C124 92 116 92 112 98C106 92 94 90 84 94Z" fill="${HOJA}" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
+  `<path d="M120 74C118 60 124 48 136 42" fill="none" stroke="#3D9440" stroke-width="8" stroke-linecap="round"/>`;
+// cara sudando con mejillas claras para que se vean sobre el rojo
+const caraTabasco = caraSudando.replaceAll('fill="#D7141F"', 'fill="#FFB4A6"');
 
 /** Cayena es el mochi demonio (la mascota en nivel 4) */
 const demonio =
@@ -73,7 +84,7 @@ export const mochiSvg: Record<SaborId, string> = {
   pina: cuerpo('#FFE680') + caraFeliz('#FF9DBB') + pina,
   parchita: cuerpo('#EBA91C') + parchitaPintas + parchitaPulpa + caraFeliz('#FF9DBB') + parchitaTallo,
   mango: mangoDefs + cuerpo('url(#hm-mango)') + mangoDetalle + caraFeliz('#FF6A4D'),
-  tabasco: cuerpo('#FFA48C') + caraSudando + tabasco,
+  tabasco: tabascoDefs + tabascoPunta + cuerpo('url(#hm-tabasco)') + tabascoBrillo + caraTabasco + tabascoCaliz,
   cayena: demonio,
 };
 

@@ -113,13 +113,13 @@ Canvas, tablero y cajas se dimensionan con `100svh` para caber en la pantalla:
 
 ## Mochis por sabor
 
-`src/data/mochis.ts` define un mochi por sabor. Los dulces **son** la fruta, no la llevan encima:
+`src/data/mochis.ts` define un mochi por sabor. Cada mochi **es** su fruta o su chile, no lo lleva encima:
 
 - **Fresa**: cuerpo rojo fresa con semillas amarillas y cáliz de hojas verdes.
 - **Piña**: cuerpo amarillo con rombos y corona de hojas.
 - **Parchita**: piel dorada con pintitas, tallo con hoja y un mordisco que enseña la pulpa con semillas.
 - **Mango**: piel en degradado verde → amarillo → rojo, brillo, tallo y hoja.
-- **Tabasco**: coral, sudando, con el ají encima.
+- **Tabasco**: es el ají. Piel roja brillante en degradado, punta curvada, cáliz verde con tallo y cara sudando.
 - **Cayena**: el mochi demonio (la mascota de nivel 4).
 
 Se usan en la carta, la memoria, el canvas de Atrapa el mochi, la caja de la suerte y los
