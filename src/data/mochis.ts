@@ -75,9 +75,38 @@ const tabascoCaliz =
 // cara sudando con mejillas claras para que se vean sobre el rojo
 const caraTabasco = caraSudando.replaceAll('fill="#D7141F"', 'fill="#FFB4A6"');
 
-/** Cayena es el mochi demonio (la mascota en nivel 4) */
+/* Cayena: el mochi demonio convertido en ají cayena.
+   Rojo intenso, piel arrugada, cola larga y curva, cáliz verde, cuernos, llamas y cara malvada. */
+const llama = (x: number, y: number, e: number) =>
+  `<g transform="translate(${x},${y}) scale(${e})"><g class="fl"><path d="M0 0C-12 -10 -10 -26 0 -44C10 -26 12 -10 0 0Z" fill="#FF6A00"/><path d="M0 0C-6 -6 -5 -16 0 -26C5 -16 6 -6 0 0Z" fill="#FFC107"/></g></g>`;
+const cayenaDefs =
+  `<defs><linearGradient id="hm-cayena" x1="0" y1="0" x2=".7" y2="1">` +
+  `<stop offset="0" stop-color="#F0321F"/><stop offset=".55" stop-color="#C8121A"/><stop offset="1" stop-color="#7E0A10"/>` +
+  `</linearGradient></defs>`;
+const cayenaCola =
+  `<path d="M146 226C176 234 200 252 204 276C206 286 196 290 190 282C180 262 162 248 128 238Z" fill="#7E0A10" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>`;
+const cayenaCuernos =
+  `<path d="M58 118Q40 84 50 56Q78 72 92 100Z" fill="#FFC107" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
+  `<path d="M182 118Q200 84 190 56Q162 72 148 100Z" fill="#FFC107" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
+  `<ellipse class="hf" cx="120" cy="50" rx="40" ry="10" fill="none" stroke="#FF6A00" stroke-width="8" transform="rotate(-12 120 50)"/>`;
+const cayenaPiel =
+  // arrugas de la piel
+  `<path d="M52 150C60 172 58 198 66 220M188 150C180 172 184 198 174 220M120 98C112 110 114 124 108 136" fill="none" stroke="#7E0A10" stroke-width="4" stroke-linecap="round" opacity=".55"/>` +
+  // brillo
+  `<path d="M60 140C64 118 78 102 98 96" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".5"/>`;
+const cayenaCara =
+  `<circle cx="66" cy="190" r="15" fill="#FF8A6E" opacity=".75"/><circle cx="174" cy="190" r="15" fill="#FF8A6E" opacity=".75"/>` +
+  `<ellipse cx="92" cy="164" rx="12" ry="11" fill="#FFC107" stroke="${T}" stroke-width="3"/><ellipse cx="148" cy="164" rx="12" ry="11" fill="#FFC107" stroke="${T}" stroke-width="3"/>` +
+  `<ellipse cx="92" cy="165" rx="3" ry="9" fill="${T}"/><ellipse cx="148" cy="165" rx="3" ry="9" fill="${T}"/>` +
+  `<path d="M70 142L108 158M170 142L132 158" stroke="${T}" stroke-width="8" stroke-linecap="round"/>` +
+  `<path d="M88 188Q120 226 152 188Q120 198 88 188Z" fill="${T}" stroke="${T}" stroke-width="3" stroke-linejoin="round"/>` +
+  `<path d="M98 191L105 205L112 193Z M128 193L135 205L142 191Z" fill="#FFF8F0"/>`;
+const cayenaCaliz =
+  `<path d="M90 92C98 78 110 74 120 76C130 74 142 78 150 92C142 89 132 90 127 96C124 91 116 91 113 96C108 90 98 89 90 92Z" fill="${HOJA}" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
+  `<path d="M120 78C118 66 122 58 130 52C134 49 138 52 136 56" fill="none" stroke="#3D9440" stroke-width="7" stroke-linecap="round"/>`;
 const demonio =
-  `<g transform="translate(36,246) scale(1.4)"><g class="fl"><path d="M0 0C-12 -10 -10 -26 0 -44C10 -26 12 -10 0 0Z" fill="#FF6A00"/><path d="M0 0C-6 -6 -5 -16 0 -26C5 -16 6 -6 0 0Z" fill="#FFC107"/></g></g><g transform="translate(204,246) scale(1.4)"><g class="fl"><path d="M0 0C-12 -10 -10 -26 0 -44C10 -26 12 -10 0 0Z" fill="#FF6A00"/><path d="M0 0C-6 -6 -5 -16 0 -26C5 -16 6 -6 0 0Z" fill="#FFC107"/></g></g><path d="M58 118Q40 84 50 56Q78 72 92 100Z" fill="#FFC107" stroke="#3A1F3D" stroke-width="4" stroke-linejoin="round"/><path d="M182 118Q200 84 190 56Q162 72 148 100Z" fill="#FFC107" stroke="#3A1F3D" stroke-width="4" stroke-linejoin="round"/><ellipse class="hf" cx="120" cy="62" rx="44" ry="11" fill="none" stroke="#FF6A00" stroke-width="9" transform="rotate(-12 120 62)"/><path d="M30 192C30 117 70 82 120 82C170 82 210 117 210 192C210 222 190 237 120 237C50 237 30 222 30 192Z" fill="#D7141F" stroke="#3A1F3D" stroke-width="5"/><circle cx="66" cy="190" r="15" fill="#8A0E18"/><circle cx="174" cy="190" r="15" fill="#8A0E18"/><ellipse cx="92" cy="164" rx="12" ry="11" fill="#FFC107" stroke="#3A1F3D" stroke-width="3"/><ellipse cx="148" cy="164" rx="12" ry="11" fill="#FFC107" stroke="#3A1F3D" stroke-width="3"/><ellipse cx="92" cy="165" rx="3" ry="9" fill="#3A1F3D"/><ellipse cx="148" cy="165" rx="3" ry="9" fill="#3A1F3D"/><path d="M70 142L108 158M170 142L132 158" stroke="#3A1F3D" stroke-width="8" stroke-linecap="round"/><path d="M88 188Q120 226 152 188Q120 198 88 188Z" fill="#3A1F3D" stroke="#3A1F3D" stroke-width="3" stroke-linejoin="round"/><path d="M98 191L105 205L112 193Z M128 193L135 205L142 191Z" fill="#FFF8F0"/>`;
+  cayenaDefs + llama(36, 246, 1.4) + llama(220, 238, 1.1) + cayenaCola + cayenaCuernos +
+  cuerpo('url(#hm-cayena)') + cayenaPiel + cayenaCara + cayenaCaliz;
 
 export const mochiSvg: Record<SaborId, string> = {
   fresa: cuerpo('#FF6B7F') + fresaSemillas + caraFeliz('#FFB3C1') + fresaCaliz,

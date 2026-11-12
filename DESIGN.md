@@ -120,7 +120,8 @@ Canvas, tablero y cajas se dimensionan con `100svh` para caber en la pantalla:
 - **Parchita**: piel dorada con pintitas, tallo con hoja y un mordisco que enseña la pulpa con semillas.
 - **Mango**: piel en degradado verde → amarillo → rojo, brillo, tallo y hoja.
 - **Tabasco**: es el ají. Piel roja brillante en degradado, punta curvada, cáliz verde con tallo y cara sudando.
-- **Cayena**: el mochi demonio (la mascota de nivel 4).
+- **Cayena**: el mochi demonio hecho ají cayena. Rojo intenso con piel arrugada, cola larga y
+  curva, cáliz verde, cuernos, aureola caída, llamas y cara malvada.
 
 Se usan en la carta, la memoria, el canvas de Atrapa el mochi, la caja de la suerte y los
 resultados. Las mascotas de nivel (m1–m4) siguen para los niveles y la acompañante.
