@@ -26,7 +26,7 @@ const COMENTARIOS: Record<string, string[]> = {
     '60 segundos sin agua. Dijiste que eras valiente, ¿no?',
     'Spoiler: vas a pedir leche.',
     'El reto doble es como el primero, pero con más arrepentimiento.',
-    'Cada sello cuesta un mochi y un poco de dignidad.',
+    'Cada sticker cuesta un mochi y un poco de dignidad.',
   ],
   preguntas: [
     '¿Más dudas? Qué raro, si todo está clarísimo.',
@@ -34,7 +34,7 @@ const COMENTARIOS: Record<string, string[]> = {
     'No, el picante no se quita con agua. Pregúntale a cualquiera.',
   ],
   tarjeta: [
-    'Cuatro sellos y un mochi gratis. Las matemáticas nunca dolieron tanto.',
+    'Cuatro stickers y un mochi gratis. Las matemáticas nunca dolieron tanto.',
     '¿Te falta el nivel 4? Lo sé. Lo huelo.',
     'Gratis sabe mejor. Picante también. Gratis y picante… muajaja.',
   ],

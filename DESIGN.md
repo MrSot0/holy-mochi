@@ -140,13 +140,16 @@ Todas las tarjetas de sabor comparten estilo: mochi asomando arriba, nombre, des
 pie con llamas y precio ($1). Filas centradas: 4 dulces y 3 picantes por fila en escritorio,
 2 en tablet y 1 en móvil. La memoria usa 6 de los 7 sabores al azar en cada partida.
 
-## Retos y tarjeta
+## Retos y stickers
 
 Los retos giran alrededor de comprar: cada reto se supera con un mochi concreto (se ve en el
-talón del ticket) y vale un sello. El nivel 1, **Reto de la caja**, no tiene sabor fijo: el botón
-"Abrir la caja" (`data-abrir-juego="caja"`) abre la Caja de la suerte y se compra el que salga. La sección final es la **tarjeta de retos** con 4 sellos;
-completa da un mochi gratis (`[CONDICIONES Y VIGENCIA]` pendiente). No hay redes sociales:
-nada de grabarse, etiquetar ni compartir.
+talón del ticket) y da un **sticker** que el cliente guarda. El nivel 1, **Reto de la caja**, no
+tiene sabor fijo: el botón "Abrir la caja" (`data-abrir-juego="caja"`) abre la Caja de la suerte
+y se compra el que salga.
+
+La sección final (`#tarjeta`) es **"Junta los 4 stickers"**: un álbum con un hueco punteado por
+nivel y su sticker troquelado (`.sticker`: borde blanco, sombra, ligera inclinación). Los cuatro
+stickers dan un mochi gratis (`[CONDICIONES Y VIGENCIA]` pendiente). No hay redes sociales.
 
 ## Acompañante
 

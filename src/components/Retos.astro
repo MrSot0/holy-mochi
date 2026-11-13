@@ -16,7 +16,7 @@ const pasos = [
     <div class="flex flex-wrap items-end justify-between gap-x-12 gap-y-4">
       <h2 id="retos-titulo" class="font-display text-[clamp(40px,6vw,76px)] leading-none">Tickets de reto</h2>
       <p class="max-w-[26em] text-[19px] leading-normal">
-        Compra el mochi de tu nivel y supéralo al momento. Cada reto superado es un sello: con los cuatro te llevas {site.premio}.
+        Compra el mochi de tu nivel y supéralo al momento. Cada reto superado te da un sticker: junta los cuatro y te llevas {site.premio}.
       </p>
     </div>
 
@@ -32,7 +32,7 @@ const pasos = [
             <h3 class="font-display text-[28px] leading-tight lg:text-[25px]">{r.nombre}</h3>
             <p>{r.descripcion}</p>
             {r.juego && (
-              <a href="#ruleta" data-abrir-juego={r.juego} class="btn mt-1 self-start bg-oro !min-h-[40px] !px-4 !py-1.5 !text-[15px] !shadow-pop-sm">Abrir la caja</a>
+              <a href="#ruleta" data-abrir-juego={r.juego} class="btn mt-1 self-center bg-oro !min-h-[40px] !px-4 !py-1.5 !text-[15px] !shadow-pop-sm">Abrir la caja</a>
             )}
           </div>
           <div class:list={['flex w-24 shrink-0 items-center justify-center border-l-[3px] border-dashed border-tinta lg:w-full lg:border-b-[3px] lg:border-l-0 lg:py-3', r.talon]}>

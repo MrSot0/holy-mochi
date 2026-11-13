@@ -62,5 +62,5 @@ export const preguntas: { pregunta: string; respuesta: string }[] = [
   { pregunta: '¿Dónde los compro?', respuesta: '[DÓNDE Y CÓMO COMPRAR: dirección o punto de venta en Maracaibo, horario y si hay delivery]' },
   { pregunta: '¿Cuánto duran y cómo se guardan?', respuesta: '[CONSERVACIÓN Y CADUCIDAD]' },
   { pregunta: '¿Tienen información de alérgenos?', respuesta: '[ALÉRGENOS]' },
-  { pregunta: '¿Cómo funcionan los retos?', respuesta: 'Compras el mochi del reto, lo superas al momento y te sellamos la tarjeta. Con los cuatro niveles sellados, te llevas un mochi gratis.' },
+  { pregunta: '¿Cómo funcionan los retos?', respuesta: 'Compras el mochi del reto, lo superas al momento y te damos un sticker. Guárdalo: con los stickers de los cuatro niveles te llevas un mochi gratis.' },
 ];

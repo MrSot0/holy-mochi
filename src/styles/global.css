@@ -208,3 +208,13 @@
   .cabecera { transition: none; }
   .menu-movil:not([hidden]), .menu-movil:not([hidden]) .menu-mascota, .menu-movil:not([hidden]) .menu-enlace { animation: none; }
 }
+
+/* ───── Stickers del álbum ───── */
+.sticker {
+  transform: rotate(var(--giro, 0deg));
+  border: 3px solid var(--color-tinta);
+  outline: 5px solid #fff;
+  box-shadow: 4px 6px 0 6px rgb(58 31 61 / .18);
+  transition: transform .25s cubic-bezier(.3,1.5,.5,1);
+}
+@media (hover: hover) { .sticker:hover { transform: rotate(0deg) scale(1.06); } }

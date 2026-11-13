@@ -4,7 +4,8 @@ import MochiSabor from './MochiSabor.astro';
 import { retos, type Nivel } from '../data/menu';
 import { site } from '../data/site';
 
-const sellos: { nivel: Nivel; fondo: string }[] = retos.map((r) => ({ nivel: r.nivel, fondo: r.talon }));
+// un sticker por nivel, con el mochi de su reto (el nivel 1 sale de la caja: va la mascota)
+const stickers = retos.map((r, i) => ({ nivel: r.nivel as Nivel, fondo: r.talon, sabor: r.sabor, giro: [-6, 4, -3, 7][i] }));
 ---
 <section id="tarjeta" data-nivel="4" class="seccion border-t-[3px] border-tinta bg-fresa bg-lunares" aria-labelledby="tarjeta-titulo">
   <div class="contenedor flex flex-col items-center gap-10 text-center">
@@ -14,21 +15,23 @@ const sellos: { nivel: Nivel; fondo: string }[] = retos.map((r) => ({ nivel: r.n
       <MochiSabor id="pina" ancho={90} camina="der" />
     </div>
     <div class="flex flex-col items-center gap-4">
-      <h2 id="tarjeta-titulo" class="text-[clamp(36px,6vw,80px)] leading-none">La tarjeta de retos</h2>
-      <p class="max-w-[30em] text-[19px]">Cada reto que superas es un sello. Completa los cuatro niveles y te llevas {site.premio}. Sí, te estamos haciendo comprar más. Y tú a nosotros sudar de orgullo.</p>
+      <h2 id="tarjeta-titulo" class="text-[clamp(36px,6vw,80px)] leading-none">Junta los 4 stickers</h2>
+      <p class="max-w-[30em] text-[19px]">Cada reto que superas te da un sticker. Guárdalos, junta los cuatro niveles y te llevas {site.premio}. Sí, te estamos haciendo comprar más. Y tú a nosotros sudar de orgullo.</p>
     </div>
 
-    <!-- La tarjeta: un sello por nivel -->
+    <!-- El álbum: un hueco por nivel con su sticker troquelado -->
     <div class="w-full max-w-[720px] rounded-[28px] border-[3px] border-tinta bg-blanco p-5 shadow-pop-lg sm:p-7">
-      <div data-no-centrar class="mb-4 flex items-center justify-between gap-3 border-b-[3px] border-dashed border-tinta/40 pb-3">
+      <div data-no-centrar class="mb-5 flex items-center justify-between gap-3 border-b-[3px] border-dashed border-tinta/40 pb-3">
         <span class="text-[22px] text-chile-texto">{site.nombre}</span>
-        <span class="text-[15px]">Tarjeta de retos</span>
+        <span class="text-[15px]">Álbum de retos</span>
       </div>
-      <ol class="grid grid-cols-2 gap-4 sm:grid-cols-4" aria-label="Sellos de la tarjeta">
-        {sellos.map((s) => (
+      <ol class="grid grid-cols-2 gap-5 sm:grid-cols-4" aria-label="Stickers del álbum">
+        {stickers.map((s) => (
           <li class="flex flex-col items-center gap-2">
-            <span class:list={['grid aspect-square w-full max-w-[120px] place-items-center rounded-full border-[3px] border-dashed border-tinta', s.fondo]}>
-              <Mascota nivel={s.nivel} ancho={70} />
+            <span class="grid aspect-square w-full max-w-[124px] place-items-center rounded-[22px] border-[3px] border-dashed border-tinta/50 bg-arroz">
+              <span class:list={['sticker grid aspect-square w-[82%] place-items-center rounded-[18px]', s.fondo]} style={`--giro:${s.giro}deg`}>
+                {s.sabor ? <MochiSabor id={s.sabor} ancho={64} /> : <Mascota nivel={1} ancho={60} />}
+              </span>
             </span>
             <span class="text-[15px]">Nivel {s.nivel}</span>
           </li>
@@ -40,7 +43,7 @@ const sellos: { nivel: Nivel; fondo: string }[] = retos.map((r) => ({ nivel: r.n
       <a href="#retos" class="btn bg-oro">Ver los retos</a>
       <a href="#sabores" class="btn bg-blanco">Ver la carta</a>
     </div>
-    <p class="text-[14px]">Un mochi gratis por tarjeta completa. [CONDICIONES Y VIGENCIA]</p>
+    <p class="text-[14px]">Un mochi gratis por cada 4 stickers. [CONDICIONES Y VIGENCIA]</p>
   </div>
 </section>
 
