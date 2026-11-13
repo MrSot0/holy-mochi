@@ -36,12 +36,14 @@ export interface Reto {
   nivel: Nivel;
   descripcion: string;
   talon: string;
-  /** Mochi que hay que comprar para el reto */
-  sabor: SaborId;
+  /** Mochi que hay que comprar para el reto (sin él, lo decide la Caja de la suerte) */
+  sabor?: SaborId;
+  /** Minijuego que abre el botón del ticket */
+  juego?: 'caja';
 }
 
 export const retos: Reto[] = [
-  { nombre: 'Reto a ciegas', nivel: 1, descripcion: 'Compra una caja de 4 dulces sin mirar y adivina cada sabor al primer bocado.', talon: 'bg-pina', sabor: 'fresa' },
+  { nombre: 'Reto de la caja', nivel: 1, descripcion: 'Abre la Caja de la suerte y compra el mochi que te salga. Sin cambios, sin quejas.', talon: 'bg-pina', juego: 'caja' },
   { nombre: 'Reto del minuto', nivel: 2, descripcion: 'Compra un Ají y pimienta y aguanta 60 segundos sin agua.', talon: 'bg-parchita', sabor: 'ajipimienta' },
   { nombre: 'Reto doble', nivel: 3, descripcion: 'Compra dos Cayena y piri piri y cómetelos seguidos, sin pausa.', talon: 'bg-mango', sabor: 'cayenapiripiri' },
   { nombre: 'Reto de los cuatro fuegos', nivel: 4, descripcion: 'Compra el de ají, pimienta roja, cayena y tabasco y termínalo entero.', talon: 'bg-cayena', sabor: 'cuatrofuegos' },

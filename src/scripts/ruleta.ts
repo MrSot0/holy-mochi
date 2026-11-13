@@ -173,6 +173,15 @@ export function iniciarRuleta(): void {
   }
 
   botonGirar.addEventListener('click', girar);
+  // enlaces de fuera de la ruleta (p. ej. el ticket del nivel 1) que abren un minijuego
+  document.querySelectorAll<HTMLAnchorElement>('[data-abrir-juego]').forEach((a) =>
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = a.dataset.abrirJuego as Juego;
+      estado.textContent = `Elegiste ${NOMBRES[id]}.`;
+      mostrarJuego(id);
+    }),
+  );
   seccion.querySelectorAll<HTMLButtonElement>('[data-ir]').forEach((b) =>
     b.addEventListener('click', () => {
       const id = b.dataset.ir as Juego;

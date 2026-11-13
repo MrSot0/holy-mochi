@@ -4,7 +4,7 @@ import { retos } from '../data/menu';
 import { site } from '../data/site';
 
 // Escalera: cada nivel un poco más alto que el anterior
-const alturas = ['', 'lg:min-h-[200px]', 'lg:min-h-[230px]', 'lg:min-h-[260px]'];
+const alturas = ['', 'lg:min-h-[395px]', 'lg:min-h-[415px]', 'lg:min-h-[435px]'];
 const pasos = [
   { titulo: 'Elige tu nivel', texto: 'Del 1 al 4, según cuánto aguantes.' },
   { titulo: 'Compra el mochi del reto', texto: 'Todos a $1. Sin trampas.' },
@@ -31,9 +31,22 @@ const pasos = [
             <span class:list={['text-[15px] font-bold', r.nivel === 4 && 'text-chile-texto']}>Nivel {r.nivel}</span>
             <h3 class="font-display text-[28px] leading-tight lg:text-[25px]">{r.nombre}</h3>
             <p>{r.descripcion}</p>
+            {r.juego && (
+              <a href="#ruleta" data-abrir-juego={r.juego} class="btn mt-1 self-start bg-oro !min-h-[40px] !px-4 !py-1.5 !text-[15px] !shadow-pop-sm">Abrir la caja</a>
+            )}
           </div>
           <div class:list={['flex w-24 shrink-0 items-center justify-center border-l-[3px] border-dashed border-tinta lg:w-full lg:border-b-[3px] lg:border-l-0 lg:py-3', r.talon]}>
-            <MochiSabor id={r.sabor} ancho={76} />
+            {r.sabor ? (
+              <MochiSabor id={r.sabor} ancho={76} />
+            ) : (
+              <span class="relative flex w-[60px] flex-col items-center" aria-hidden="true">
+                <span class="block h-3.5 w-[66px] rounded-lg border-[3px] border-tinta bg-fresa-fuerte"></span>
+                <span class="relative -mt-[3px] grid aspect-square w-full place-items-center rounded-b-xl border-[3px] border-tinta bg-fresa">
+                  <span class="absolute inset-y-0 left-1/2 w-3 -translate-x-1/2 border-x-[3px] border-tinta bg-fresa-fuerte"></span>
+                  <span class="relative rounded-full border-[3px] border-tinta bg-blanco px-1.5 text-[15px] leading-tight">?</span>
+                </span>
+              </span>
+            )}
           </div>
         </li>
       ))}
