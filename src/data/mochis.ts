@@ -2,7 +2,7 @@
  * Un mochi por sabor: cuerpo del color de su fruta y la fruta encima.
  * El mismo SVG se usa en el sprite (con animación CSS) y en el canvas del juego.
  */
-export type SaborId = 'pinaparchita' | 'fresa' | 'chocolate' | 'ajipimienta' | 'cayenapiripiri' | 'cuatrofuegos';
+export type SaborId = 'pina' | 'fresa' | 'parchita' | 'chocolate' | 'ajipimienta' | 'cayenapiripiri' | 'cuatrofuegos';
 
 const T = '#3A1F3D'; // tinta
 const HOJA = '#4DAA4F';
@@ -88,10 +88,13 @@ const demonio =
   cayenaDefs + llama(36, 246, 1.4) + llama(220, 238, 1.1) + cayenaCola + cayenaCuernos +
   cuerpo('url(#hm-cayena)') + cayenaPiel + cayenaCara + cayenaCaliz;
 
-/* Piña parchita: piña con corona y un mordisco que enseña la pulpa de parchita */
-const pinaRombos = [[62, 132], [92, 112], [50, 168], [190, 172], [120, 106], [70, 214], [170, 214]]
-  .map(([x, y]) => `<path d="M${x - 6} ${y}l6-6 6 6-6 6z" fill="#F2B705"/>`).join('');
-const pinaCorona = pina.split('<path d="M').slice(0, 4).join('<path d="M');
+/* Parchita: piel dorada con pintitas, un mordisco con la pulpa, tallo y hoja */
+const parchitaPintas = [[66, 132], [96, 112], [120, 126], [54, 172], [190, 178], [70, 214], [170, 214], [120, 224], [44, 204], [196, 206], [84, 100]]
+  .map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.4" fill="#FFF6C8"/>`).join('');
+const parchitaTallo =
+  `<path d="M120 86C118 72 121 62 128 56" fill="none" stroke="#6B7F2A" stroke-width="7" stroke-linecap="round"/>` +
+  `<path d="M127 58C138 44 157 42 166 48C157 61 140 63 127 58Z" fill="${HOJA}" stroke="${T}" stroke-width="4" stroke-linejoin="round"/>` +
+  `<path d="M131 57C142 53 152 51 160 50" fill="none" stroke="#3D9440" stroke-width="2.5" stroke-linecap="round"/>`;
 
 /* Chocolate: cuerpo de cacao con baño que chorrea y chispitas de colores */
 const chispitas: [number, number, string, number][] = [
@@ -135,8 +138,9 @@ const caraLlorando =
 const piriBrillo = `<path d="M60 142C64 120 78 104 98 98" fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round" opacity=".45"/>`;
 
 export const mochiSvg: Record<SaborId, string> = {
-  pinaparchita: cuerpo('#FFE680') + pinaRombos + parchitaPulpa + caraFeliz('#FF9DBB') + pinaCorona,
+  pina: cuerpo('#FFE680') + caraFeliz('#FF9DBB') + pina,
   fresa: cuerpo('#FF6B7F') + fresaSemillas + caraFeliz('#FFB3C1') + fresaCaliz,
+  parchita: cuerpo('#EBA91C') + parchitaPintas + parchitaPulpa + caraFeliz('#FF9DBB') + parchitaTallo,
   chocolate: cuerpo('#A86A3D') + chocolateBano + caraFeliz('#FF9DBB'),
   ajipimienta: ajiDefs + tabascoPunta + cuerpo('url(#hm-aji)') + pimientaGranos + tabascoBrillo + caraTabasco + tabascoCaliz,
   cayenapiripiri: piriDefs + piriCola + cuerpo('url(#hm-piri)') + piriBrillo + caraLlorando + piriChiles,
@@ -145,8 +149,9 @@ export const mochiSvg: Record<SaborId, string> = {
 
 /** Clase de animación según el carácter del sabor */
 export const animacionSabor: Record<SaborId, string> = {
-  pinaparchita: 'anim-respira',
+  pina: 'anim-respira',
   fresa: 'anim-respira',
+  parchita: 'anim-respira',
   chocolate: 'anim-respira',
   ajipimienta: 'anim-tiembla',
   cayenapiripiri: 'anim-tiembla-rapido',

@@ -402,6 +402,7 @@ function juegoAtrapa(panel: HTMLElement, alResultado: AlResultado): Minijuego {
 }
 
 /* ───────────── Juego 2: Memoria picante ───────────── */
+const PAREJAS = 6;
 function juegoMemoria(panel: HTMLElement, alResultado: AlResultado): Minijuego {
   const tablero = $<HTMLElement>(panel, '[data-tablero]');
   const parejasEl = $<HTMLElement>(panel, '[data-parejas]');
@@ -423,7 +424,9 @@ function juegoMemoria(panel: HTMLElement, alResultado: AlResultado): Minijuego {
     intentosEl.textContent = '0';
     $<HTMLElement>(panel, '[data-resultado]').hidden = true;
 
-    const cartas = barajar([...todos, ...todos]).map((sabor, i) => {
+    // 6 parejas con 6 sabores al azar de la carta
+    const enJuego = barajar(todos).slice(0, PAREJAS);
+    const cartas = barajar([...enJuego, ...enJuego]).map((sabor, i) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.className = 'carta';
@@ -459,7 +462,7 @@ function juegoMemoria(panel: HTMLElement, alResultado: AlResultado): Minijuego {
       });
       aviso.textContent = `¡Pareja de ${sabor.nombre}!`;
       abiertas = [];
-      if (parejas === todos.length && estrella) {
+      if (parejas === PAREJAS && estrella) {
         const s = estrella;
         temporizador = window.setTimeout(() => alResultado('memoria', s, `Tu sabor estrella: ${s.nombre}`, `Completaste el tablero en ${intentos} intentos. ${s.nombre} fue tu primera pareja, así que es tu mochi.`), 500);
       }

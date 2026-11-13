@@ -19,7 +19,7 @@ const COMENTARIOS: Record<string, string[]> = {
     'Chocolate es para los que le tienen miedo a la vida. No juzgo. Bueno, sí.',
     'Todo a $1. Más barato que tu terapia después de los cuatro fuegos.',
     'La cayena no muerde. Quema, que es muy distinto.',
-    'Piña parchita: dulce por fuera, ácida por dentro. Como tu ex.',
+    'Parchita: ácida como tu ex. Pero esta sí vale la pena.',
     'Ají, pimienta roja, cayena y tabasco. Sí, los cuatro. No, no estamos bien.',
   ],
   retos: [

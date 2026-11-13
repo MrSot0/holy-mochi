@@ -4,8 +4,8 @@ import MochiSabor from './MochiSabor.astro';
 import { site } from '../data/site';
 import type { SaborId } from '../data/mochis';
 
-// Móvil: los seis mochis llegan desde los bordes y se reúnen
-const atras: SaborId[] = ['pinaparchita', 'fresa', 'chocolate'];
+// Móvil: los siete mochis llegan desde los bordes y se reúnen
+const atras: SaborId[] = ['pina', 'fresa', 'parchita', 'chocolate'];
 const delante: SaborId[] = ['ajipimienta', 'cayenapiripiri', 'cuatrofuegos'];
 ---
 <section id="inicio" data-nivel="1" class="seccion bg-pina bg-lunares max-md:!pt-8">
@@ -13,11 +13,11 @@ const delante: SaborId[] = ['ajipimienta', 'cayenapiripiri', 'cuatrofuegos'];
     <div
       class="reunion w-full md:hidden"
       role="img"
-      aria-label="Los seis mochis de Holy Mochi juntos: piña parchita, fresa, chocolate, ají y pimienta, cayena y piri piri, y ají con pimienta roja, cayena y tabasco"
+      aria-label="Los siete mochis de Holy Mochi juntos: piña, fresa, parchita, chocolate, ají y pimienta, cayena y piri piri, y ají con pimienta roja, cayena y tabasco"
     >
       <div class="flex items-end justify-center gap-1">
         {atras.map((id, i) => (
-          <MochiSabor id={id} ancho={92} camina="izq" retraso={i * 180} class="w-[26vw] max-w-[110px]" />
+          <MochiSabor id={id} ancho={84} camina="izq" retraso={i * 160} class="w-[21vw] max-w-[100px]" />
         ))}
       </div>
       <div class="-mt-[9vw] flex items-end justify-center gap-1">
@@ -34,7 +34,7 @@ const delante: SaborId[] = ['ajipimienta', 'cayenapiripiri', 'cuatrofuegos'];
         Mochis que pican. <span class="text-chile-texto">Mochis que retan.</span>
       </h1>
       <p class="hidden max-w-[30em] text-[clamp(18px,2.2vw,22px)] leading-normal md:block">
-        Piña parchita, fresa y chocolate para los dulceros. Ají, pimienta, cayena, piri piri y tabasco para los valientes. Elige tu sabor y acepta un reto.
+        Piña, fresa, parchita y chocolate para los dulceros. Ají, pimienta, cayena, piri piri y tabasco para los valientes. Elige tu sabor y acepta un reto.
       </p>
       <p class="text-[18px] md:hidden">{site.ciudad} · Todos a $1</p>
       <div class="flex flex-wrap gap-4">

@@ -3,6 +3,8 @@ import MochiSabor from './MochiSabor.astro';
 import Llamas from './Llamas.astro';
 import { dulces, picantes, type Sabor } from '../data/menu';
 
+// ancho de cada tarjeta en escritorio según cuántos sabores tiene el grupo
+const anchoLg: Record<number, string> = { 3: 'lg:w-[calc((100%-40px)/3)]', 4: 'lg:w-[calc((100%-60px)/4)]' };
 const grupos: { titulo: string; kanji: string; color: string; sabores: Sabor[] }[] = [
   { titulo: 'Dulces', kanji: '甘', color: '', sabores: dulces },
   { titulo: 'Picantes', kanji: '辛', color: 'text-chile-texto', sabores: picantes },
@@ -19,9 +21,9 @@ const grupos: { titulo: string; kanji: string; color: string; sabores: Sabor[] }
       <div class="flex flex-col gap-4">
         <h3 class:list={['font-display text-[32px]', g.color]}>{g.titulo} <span class="text-[22px]" lang="ja">{g.kanji}</span></h3>
         <!-- Todas las tarjetas comparten estilo: mochi asomando arriba, nombre, descripción y pie con llamas y precio -->
-        <ul class="grid grid-cols-1 gap-x-5 gap-y-16 pt-12 sm:grid-cols-2 lg:grid-cols-3">
+        <ul class="flex flex-wrap justify-center gap-x-5 gap-y-16 pt-12">
           {g.sabores.map((s) => (
-            <li id={`sabor-${s.id}`} class:list={['flex scroll-mt-32 flex-col gap-2 rounded-[28px] border-[3px] border-tinta p-6 pt-0 shadow-pop-lg', s.fondo]}>
+            <li id={`sabor-${s.id}`} class:list={['flex w-full scroll-mt-32 flex-col gap-2 rounded-[28px] border-[3px] border-tinta p-6 pt-0 shadow-pop-lg sm:w-[calc((100%-20px)/2)]', anchoLg[g.sabores.length], s.fondo]}>
               <MochiSabor id={s.id} ancho={110} class="-mt-16 mb-1 self-center" />
               <h4 class="font-display text-[clamp(24px,2.4vw,28px)] leading-tight">{s.nombre}</h4>
               <p>{s.descripcion}</p>

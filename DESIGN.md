@@ -128,15 +128,17 @@ Canvas, tablero y cajas se dimensionan con `100svh` para caber en la pantalla:
 
 | Sabor | Nivel | Dibujo | Fondo de tarjeta |
 |---|---|---|---|
-| Piña parchita | 0 | piña con rombos y corona, con un mordisco que enseña la pulpa de parchita | `pina` |
+| Piña | 0 | piña con rombos y corona de hojas | `pina` |
 | Fresa | 0 | fresa roja con semillas y cáliz verde | `fresa` |
+| Parchita | 0 | piel dorada con pintitas, mordisco con pulpa y semillas, tallo y hoja | `maracuya` (#FCE3AE) |
 | Chocolate | 0 | cacao con baño que chorrea y chispitas de colores | `cacao` (#EBD3BE) |
 | Ají y pimienta | 2 | ají de verde a rojo con granos de pimienta, sudando | `parchita` |
 | Cayena y piri piri | 3 | cayena naranja con dos piri piri en V, llorando y echando humo | `mango` |
 | Ají, pimienta roja, cayena y tabasco | 4 | el mochi demonio hecho ají: cuernos, aureola caída, cola y llamas | `cayena` |
 
 Todas las tarjetas de sabor comparten estilo: mochi asomando arriba, nombre, descripción y
-pie con llamas y precio ($1). Rejilla de 3 columnas en escritorio, 2 en tablet, 1 en móvil.
+pie con llamas y precio ($1). Filas centradas: 4 dulces y 3 picantes por fila en escritorio,
+2 en tablet y 1 en móvil. La memoria usa 6 de los 7 sabores al azar en cada partida.
 
 ## Retos y tarjeta
 
