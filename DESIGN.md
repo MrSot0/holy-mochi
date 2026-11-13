@@ -140,6 +140,13 @@ Todas las tarjetas de sabor comparten estilo: mochi asomando arriba, nombre, des
 pie con llamas y precio ($1). Filas centradas: 4 dulces y 3 picantes por fila en escritorio,
 2 en tablet y 1 en móvil. La memoria usa 6 de los 7 sabores al azar en cada partida.
 
+## Pago móvil
+
+Sección `#pago` justo después de la carta: QR de pago móvil (`public/pago-movil-qr.jpg`) en una
+tarjeta inclinada con la mascota asomándose y un globo "¡Escanéame!", precio "1 mochi × 1.000 Bs",
+calculadora de cantidad (− / +, total en Bs con formato es-VE), tres pasos y botón para descargar
+el QR (para pagar desde el mismo teléfono). Nada tapa el código.
+
 ## Retos y stickers
 
 Los retos giran alrededor de comprar: cada reto se supera con un mochi concreto (se ve en el

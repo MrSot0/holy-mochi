@@ -22,6 +22,10 @@ const COMENTARIOS: Record<string, string[]> = {
     'Parchita: ácida como tu ex. Pero esta sí vale la pena.',
     'Ají, pimienta roja, cayena y tabasco. Sí, los cuatro. No, no estamos bien.',
   ],
+  pago: [
+    'Escanea el QR. Yo no miro. Bueno, un poquito.',
+    'Mil bolívares por un mochi. El picante te lo regalamos.',
+  ],
   retos: [
     '60 segundos sin agua. Dijiste que eras valiente, ¿no?',
     'Spoiler: vas a pedir leche.',

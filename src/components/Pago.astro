@@ -1,0 +1,83 @@
+---
+import Mascota from './Mascota.astro';
+import { site } from '../data/site';
+
+const pasos = [
+  'Abre la app de tu banco y entra en Pago móvil.',
+  'Escanea el QR. Si estás en el teléfono, descárgalo y cárgalo desde la galería.',
+  'Paga 1.000 Bs por cada mochi y guarda el comprobante.',
+];
+---
+<section id="pago" data-nivel="2" class="seccion bg-cielo bg-lunares" aria-labelledby="pago-titulo">
+  <div class="contenedor flex flex-wrap items-center justify-center gap-x-16 gap-y-12">
+    <!-- QR con la mascota asomándose -->
+    <div class="relative flex-[0_1_360px] pt-16">
+      <div class="absolute top-0 right-2 z-10 flex items-end gap-1" aria-hidden="true">
+        <span class="mb-14 rounded-2xl border-[3px] border-tinta bg-blanco px-3 py-1.5 text-[15px] shadow-pop-sm">¡Escanéame!</span>
+        <Mascota nivel={1} ancho={96} camina="der" />
+      </div>
+      <figure class="relative -rotate-2 rounded-[28px] border-[3px] border-tinta bg-blanco p-4 shadow-pop-lg">
+        <img
+          src="/pago-movil-qr.jpg"
+          width="753"
+          height="752"
+          alt={`Código QR de pago móvil de ${site.nombre}`}
+          class="h-auto w-full rounded-2xl"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mt-3 text-center text-[15px]">Pago móvil · {site.nombre}</figcaption>
+      </figure>
+    </div>
+
+    <div class="flex min-w-0 flex-[1_1_420px] flex-col items-start gap-6">
+      <h2 id="pago-titulo" class="text-[clamp(40px,6vw,72px)] leading-none">Paga con pago móvil</h2>
+
+      <p class="rounded-full border-[3px] border-tinta bg-pina px-5 py-2 text-[clamp(20px,2.6vw,28px)] shadow-pop">1 mochi × 1.000 Bs</p>
+
+      <!-- Calculadora: cuántos mochis y cuánto pagar -->
+      <div class="flex flex-wrap items-center gap-4 rounded-3xl border-[3px] border-tinta bg-blanco px-5 py-4 shadow-pop">
+        <span id="pago-etiqueta">¿Cuántos mochis?</span>
+        <div class="flex items-center gap-2" role="group" aria-labelledby="pago-etiqueta">
+          <button type="button" data-pago-menos class="grid size-11 place-items-center rounded-full border-[3px] border-tinta bg-fresa text-[24px] leading-none" aria-label="Uno menos">−</button>
+          <output id="pago-cantidad" class="min-w-[2ch] text-center text-[26px] tabular-nums">1</output>
+          <button type="button" data-pago-mas class="grid size-11 place-items-center rounded-full border-[3px] border-tinta bg-fresa text-[24px] leading-none" aria-label="Uno más">+</button>
+        </div>
+        <p class="text-[20px]" aria-live="polite">Total: <b id="pago-total" class="tabular-nums">1.000 Bs</b></p>
+      </div>
+
+      <ol class="flex flex-col gap-3" aria-label="Cómo pagar">
+        {pasos.map((p, i) => (
+          <li class="flex items-start gap-3">
+            <span class="grid size-9 shrink-0 place-items-center rounded-full border-[3px] border-tinta bg-oro" aria-hidden="true">{i + 1}</span>
+            <span class="pt-1">{p}</span>
+          </li>
+        ))}
+      </ol>
+
+      <a href="/pago-movil-qr.jpg" download="holy-mochi-pago-movil.jpg" class="btn bg-oro">Descargar el QR</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const PRECIO = 1000;
+  const MAX = 50;
+  const cantidadEl = document.getElementById('pago-cantidad');
+  const totalEl = document.getElementById('pago-total');
+  const formato = new Intl.NumberFormat('es-VE');
+  let cantidad = 1;
+
+  const pintar = () => {
+    if (cantidadEl) cantidadEl.textContent = String(cantidad);
+    if (totalEl) totalEl.textContent = `${formato.format(cantidad * PRECIO)} Bs`;
+  };
+  document.querySelector('[data-pago-menos]')?.addEventListener('click', () => {
+    cantidad = Math.max(1, cantidad - 1);
+    pintar();
+  });
+  document.querySelector('[data-pago-mas]')?.addEventListener('click', () => {
+    cantidad = Math.min(MAX, cantidad + 1);
+    pintar();
+  });
+</script>
