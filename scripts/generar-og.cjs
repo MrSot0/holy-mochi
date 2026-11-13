@@ -37,7 +37,7 @@ border-radius:50% 50% 46% 54%/60% 56% 44% 40%;box-shadow:8px 8px 0 #3A1F3D;displ
     <div class="chips"><span class="chip">Maracaibo</span><span class="chip">Todos a $1</span></div>
   </div>
   <div class="blob">${m('m4', 250, 'transform:translateY(-10px)')}</div>
-  <div class="fila">${m('s-fresa', 92)}${m('s-pina', 92)}${m('s-parchita', 92)}${m('s-mango', 92)}${m('s-tabasco', 92)}${m('s-cayena', 92)}</div>
+  <div class="fila">${m('s-pinaparchita', 92)}${m('s-fresa', 92)}${m('s-chocolate', 92)}${m('s-ajipimienta', 92)}${m('s-cayenapiripiri', 92)}${m('s-cuatrofuegos', 92)}</div>
 </div></body></html>`;
 
 (async () => {

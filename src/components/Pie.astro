@@ -1,56 +1,51 @@
 ---
 import Mascota from './Mascota.astro';
 import MochiSabor from './MochiSabor.astro';
-import { site, enlaceInstagram } from '../data/site';
-const ig = enlaceInstagram();
+import { retos, type Nivel } from '../data/menu';
+import { site } from '../data/site';
 
-const pasos = [
-  { titulo: 'Juega o grábate', texto: 'Gira la ruleta o graba tu reto comiendo un mochi picante.' },
-  { titulo: 'Compártelo', texto: `Súbelo a Instagram o TikTok con ${site.hashtag} y etiqueta a ${site.instagram}.` },
-  { titulo: 'Reclama tu mochi', texto: 'Te escribimos por mensaje directo y tu próximo mochi va por nuestra cuenta.' },
-];
+const sellos: { nivel: Nivel; fondo: string }[] = retos.map((r) => ({ nivel: r.nivel, fondo: r.talon }));
 ---
-<section id="gratis" data-nivel="4" class="seccion border-t-[3px] border-tinta bg-fresa bg-lunares" aria-labelledby="gratis-titulo">
+<section id="tarjeta" data-nivel="4" class="seccion border-t-[3px] border-tinta bg-fresa bg-lunares" aria-labelledby="tarjeta-titulo">
   <div class="contenedor flex flex-col items-center gap-10 text-center">
     <div class="flex items-end justify-center gap-2" aria-hidden="true">
-      <MochiSabor id="mango" ancho={90} camina="izq" />
+      <MochiSabor id="chocolate" ancho={90} camina="izq" />
       <Mascota nivel={4} ancho={130} camina="der" />
-      <MochiSabor id="fresa" ancho={90} camina="der" />
+      <MochiSabor id="pinaparchita" ancho={90} camina="der" />
     </div>
     <div class="flex flex-col items-center gap-4">
-      <h2 id="gratis-titulo" class="text-[clamp(36px,6vw,80px)] leading-none">Gana un mochi gratis</h2>
-      <p class="max-w-[30em] text-[19px]">Comparte tu reto en redes y el próximo corre por nuestra cuenta. Sí, te estamos usando de publicidad. Y tú a nosotros de merienda.</p>
+      <h2 id="tarjeta-titulo" class="text-[clamp(36px,6vw,80px)] leading-none">La tarjeta de retos</h2>
+      <p class="max-w-[30em] text-[19px]">Cada reto que superas es un sello. Completa los cuatro niveles y te llevas {site.premio}. Sí, te estamos haciendo comprar más. Y tú a nosotros sudar de orgullo.</p>
     </div>
-    <ol class="grid w-full grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-4 text-left" aria-label="Cómo ganar un mochi gratis">
-      {pasos.map((p, i) => (
-        <li class="flex items-start gap-3.5 rounded-[24px] border-[3px] border-tinta bg-blanco px-5 py-4 shadow-pop">
-          <span class="text-[44px] leading-none" aria-hidden="true">{i + 1}</span>
-          <div><b class="text-[20px]">{p.titulo}</b><p>{p.texto}</p></div>
-        </li>
-      ))}
-    </ol>
-    <div class="flex flex-col items-center gap-3">
-      <button type="button" id="compartir-web" class="btn bg-oro">Compartir Holy Mochi</button>
-      <p id="compartir-aviso" class="min-h-[1.6em] text-[15px]" aria-live="polite"></p>
-      <p class="text-[14px]">Un mochi gratis por persona. [CONDICIONES Y VIGENCIA]</p>
+
+    <!-- La tarjeta: un sello por nivel -->
+    <div class="w-full max-w-[720px] rounded-[28px] border-[3px] border-tinta bg-blanco p-5 shadow-pop-lg sm:p-7">
+      <div data-no-centrar class="mb-4 flex items-center justify-between gap-3 border-b-[3px] border-dashed border-tinta/40 pb-3">
+        <span class="text-[22px] text-chile-texto">{site.nombre}</span>
+        <span class="text-[15px]">Tarjeta de retos</span>
+      </div>
+      <ol class="grid grid-cols-2 gap-4 sm:grid-cols-4" aria-label="Sellos de la tarjeta">
+        {sellos.map((s) => (
+          <li class="flex flex-col items-center gap-2">
+            <span class:list={['grid aspect-square w-full max-w-[120px] place-items-center rounded-full border-[3px] border-dashed border-tinta', s.fondo]}>
+              <Mascota nivel={s.nivel} ancho={70} />
+            </span>
+            <span class="text-[15px]">Nivel {s.nivel}</span>
+          </li>
+        ))}
+      </ol>
     </div>
+
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="#retos" class="btn bg-oro">Ver los retos</a>
+      <a href="#sabores" class="btn bg-blanco">Ver la carta</a>
+    </div>
+    <p class="text-[14px]">Un mochi gratis por tarjeta completa. [CONDICIONES Y VIGENCIA]</p>
   </div>
 </section>
 
 <footer class="border-t-[3px] border-tinta bg-pina px-5 pt-8 pb-40 text-center">
   <p class="text-[22px] text-chile-texto">{site.nombre}</p>
-  <p>
-    Mochis que pican en {site.ciudad} · Instagram {ig ? <a href={ig} class="underline decoration-2 underline-offset-4">{site.instagram}</a> : site.instagram}
-  </p>
+  <p>Mochis que pican en {site.ciudad} · {site.dondeComprar}</p>
   <p class="text-[14px]">© {new Date().getFullYear()} {site.nombre}</p>
 </footer>
-
-<script>
-  import { compartir } from '../data/site';
-  const boton = document.getElementById('compartir-web');
-  const aviso = document.getElementById('compartir-aviso');
-  boton?.addEventListener('click', async () => {
-    const r = await compartir('Mochis que pican en Maracaibo. ¿Te atreves con la Cayena?');
-    if (aviso) aviso.textContent = r === 'copiado' ? 'Enlace copiado. Pégalo en tus redes.' : r === 'compartido' ? '¡Gracias por compartir!' : '';
-  });
-</script>

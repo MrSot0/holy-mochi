@@ -32,13 +32,13 @@ const cajas = [
   <div class="contenedor flex flex-col gap-6">
     <div class="flex flex-col items-center gap-2 text-center">
       <h2 id="ruleta-titulo" class="text-[clamp(40px,6vw,76px)] leading-none">La ruleta del reto</h2>
-      <p class="max-w-[30em] text-[19px]">Gira, juega y descubre qué mochi te toca. Comparte tu resultado y gana un mochi gratis.</p>
+      <p class="max-w-[30em] text-[19px]">Gira, juega y descubre qué mochi te toca. Luego búscalo en la carta y pídelo.</p>
     </div>
 
     <!-- Vista 1: la ruleta, centrada -->
     <div id="vista-ruleta" class="flex flex-col items-center gap-5">
       <div class="flex items-end justify-center gap-[clamp(8px,3vw,40px)]">
-        <MochiSabor id="tabasco" ancho={110} class="hidden md:block" />
+        <MochiSabor id="ajipimienta" ancho={110} class="hidden md:block" />
         <div class="relative w-[max(220px,min(440px,86vw,calc(100svh-450px)))]">
           <svg viewBox="0 0 40 40" width="48" height="48" aria-hidden="true" class="absolute -top-4 left-1/2 z-10 -translate-x-1/2 drop-shadow-[3px_3px_0_#3A1F3D]">
             <path d="M20 38L4 6H36Z" fill="#B3101A" stroke="#3A1F3D" stroke-width="3" stroke-linejoin="round" />
@@ -59,7 +59,7 @@ const cajas = [
             <svg id="rueda-mascota" viewBox="0 0 240 280" class="w-[72%]" aria-hidden="true"><use href="#m1" width="240" height="280" /></svg>
           </div>
         </div>
-        <MochiSabor id="cayena" ancho={110} class="hidden md:block" />
+        <MochiSabor id="cuatrofuegos" ancho={110} class="hidden md:block" />
       </div>
       <button id="girar" type="button" class="btn bg-fresa-fuerte !px-10 !text-[20px]">Girar la ruleta</button>
       <p id="ruleta-estado" class="min-h-[1.6em] text-center text-[20px]" aria-live="polite"></p>
@@ -84,7 +84,7 @@ const cajas = [
         <!-- Juego 1: Atrapa el mochi -->
         <div data-panel="atrapa" hidden class="flex flex-col gap-3">
           <h3 tabindex="-1" class="sr-only">Atrapa el mochi</h3>
-          <p class="text-[15px]">Mueve la bandeja con el dedo, el ratón o las flechas. 20 segundos. Tabasco vale 2 puntos y Cayena 3.</p>
+          <p class="text-[15px]">Mueve la bandeja con el dedo, el ratón o las flechas. 20 segundos. Cada mochi vale tantos puntos como llamas tiene.</p>
           <div class="grid grid-cols-[1fr_auto_1fr] items-center gap-2 text-[15px] sm:text-[17px] [&>span:last-child]:justify-self-end">
             <span>Tiempo: <b data-tiempo>20</b> s</span>
             <button type="button" data-empezar class="btn bg-oro !min-h-[44px] !py-2 !text-base !shadow-pop-sm">Empezar</button>
@@ -143,9 +143,8 @@ const cajas = [
       <div class="flex min-w-[200px] flex-1 flex-col gap-2">
         <p data-res-titulo tabindex="-1" class="text-[26px] leading-tight"></p>
         <p data-res-detalle></p>
-        <p data-res-aviso class="min-h-[1.4em] text-[14px]" aria-live="polite"></p>
         <div class="flex flex-wrap gap-3 pt-1">
-          <button data-res-cta type="button" class="btn bg-oro">Compartir mi resultado</button>
+          <a data-res-cta href="#sabores" class="btn bg-oro">Ver en la carta</a>
           <button data-res-otra type="button" class="btn bg-blanco">Girar otra vez</button>
         </div>
       </div>

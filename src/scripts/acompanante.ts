@@ -11,30 +11,31 @@ const COMENTARIOS: Record<string, string[]> = {
     'Baja. Abajo están los que pican. Cobarde no eres… ¿o sí?',
   ],
   nosotros: [
-    'Nuestra historia es conmovedora. Yo lloré, pero fue por la Cayena.',
+    'Nuestra historia es conmovedora. Yo lloré, pero fue por la cayena.',
     'Lee con calma, yo espero. Derritiéndome, pero espero.',
     'El aire acondicionado sigue roto, por si preguntabas.',
   ],
   sabores: [
-    'Fresa es para los que le tienen miedo a la vida. No juzgo. Bueno, sí.',
-    'Todo a $1. Más barato que tu terapia después de la Cayena.',
-    'La Cayena no muerde. Quema, que es muy distinto.',
-    'Parchita: ácida como tu ex. Pero esta sí vale la pena.',
+    'Chocolate es para los que le tienen miedo a la vida. No juzgo. Bueno, sí.',
+    'Todo a $1. Más barato que tu terapia después de los cuatro fuegos.',
+    'La cayena no muerde. Quema, que es muy distinto.',
+    'Piña parchita: dulce por fuera, ácida por dentro. Como tu ex.',
+    'Ají, pimienta roja, cayena y tabasco. Sí, los cuatro. No, no estamos bien.',
   ],
   retos: [
     '60 segundos sin agua. Dijiste que eras valiente, ¿no?',
-    'Grábalo. Tu cara llorando vale oro.',
     'Spoiler: vas a pedir leche.',
     'El reto doble es como el primero, pero con más arrepentimiento.',
+    'Cada sello cuesta un mochi y un poco de dignidad.',
   ],
   preguntas: [
     '¿Más dudas? Qué raro, si todo está clarísimo.',
-    'La respuesta a casi todo es: pide otro mochi.',
+    'La respuesta a casi todo es: compra otro mochi.',
     'No, el picante no se quita con agua. Pregúntale a cualquiera.',
   ],
-  gratis: [
-    'Mochi gratis por compartir. Sí, te estamos usando de publicidad.',
-    'Comparte ya. Tus amigos también merecen sufrir.',
+  tarjeta: [
+    'Cuatro sellos y un mochi gratis. Las matemáticas nunca dolieron tanto.',
+    '¿Te falta el nivel 4? Lo sé. Lo huelo.',
     'Gratis sabe mejor. Picante también. Gratis y picante… muajaja.',
   ],
 };

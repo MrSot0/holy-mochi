@@ -114,7 +114,7 @@ Escala de 4px (Tailwind por defecto). Secciones: `clamp(64px, 10vw, 128px)` vert
 ## Ruleta del reto
 
 Tres minijuegos (`src/scripts/ruleta.ts`), cada uno termina en un sabor concreto
-y un botón "Compartir mi resultado" (menú nativo o copiar). La ruleta aparece sola y
+y un botón "Ver X en la carta" que lleva a la tarjeta de ese sabor. La ruleta aparece sola y
 centrada; al elegir juego sale con un salto y entra el escenario con "Volver a la ruleta".
 Canvas, tablero y cajas se dimensionan con `100svh` para caber en la pantalla:
 
@@ -124,18 +124,26 @@ Canvas, tablero y cajas se dimensionan con `100svh` para caber en la pantalla:
 
 ## Mochis por sabor
 
-`src/data/mochis.ts` define un mochi por sabor. Cada mochi **es** su fruta o su chile, no lo lleva encima:
+`src/data/mochis.ts` define un mochi por sabor. Cada mochi **es** su fruta o su chile:
 
-- **Fresa**: cuerpo rojo fresa con semillas amarillas y cáliz de hojas verdes.
-- **Piña**: cuerpo amarillo con rombos y corona de hojas.
-- **Parchita**: piel dorada con pintitas, tallo con hoja y un mordisco que enseña la pulpa con semillas.
-- **Mango**: piel en degradado verde → amarillo → rojo, brillo, tallo y hoja.
-- **Tabasco**: es el ají. Piel roja brillante en degradado, punta curvada, cáliz verde con tallo y cara sudando.
-- **Cayena**: el mochi demonio hecho ají cayena. Rojo intenso con piel arrugada, cola larga y
-  curva, cáliz verde, cuernos, aureola caída, llamas y cara malvada.
+| Sabor | Nivel | Dibujo | Fondo de tarjeta |
+|---|---|---|---|
+| Piña parchita | 0 | piña con rombos y corona, con un mordisco que enseña la pulpa de parchita | `pina` |
+| Fresa | 0 | fresa roja con semillas y cáliz verde | `fresa` |
+| Chocolate | 0 | cacao con baño que chorrea y chispitas de colores | `cacao` (#EBD3BE) |
+| Ají y pimienta | 2 | ají de verde a rojo con granos de pimienta, sudando | `parchita` |
+| Cayena y piri piri | 3 | cayena naranja con dos piri piri en V, llorando y echando humo | `mango` |
+| Ají, pimienta roja, cayena y tabasco | 4 | el mochi demonio hecho ají: cuernos, aureola caída, cola y llamas | `cayena` |
 
-Se usan en la carta, la memoria, el canvas de Atrapa el mochi, la caja de la suerte y los
-resultados. Las mascotas de nivel (m1–m4) siguen para los niveles y la acompañante.
+Todas las tarjetas de sabor comparten estilo: mochi asomando arriba, nombre, descripción y
+pie con llamas y precio ($1). Rejilla de 3 columnas en escritorio, 2 en tablet, 1 en móvil.
+
+## Retos y tarjeta
+
+Los retos giran alrededor de comprar: cada reto se supera con un mochi concreto (se ve en el
+talón del ticket) y vale un sello. La sección final es la **tarjeta de retos** con 4 sellos;
+completa da un mochi gratis (`[CONDICIONES Y VIGENCIA]` pendiente). No hay redes sociales:
+nada de grabarse, etiquetar ni compartir.
 
 ## Acompañante
 

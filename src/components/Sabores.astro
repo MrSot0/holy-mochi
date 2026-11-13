@@ -1,7 +1,12 @@
 ---
 import MochiSabor from './MochiSabor.astro';
 import Llamas from './Llamas.astro';
-import { dulces, picantes } from '../data/menu';
+import { dulces, picantes, type Sabor } from '../data/menu';
+
+const grupos: { titulo: string; kanji: string; color: string; sabores: Sabor[] }[] = [
+  { titulo: 'Dulces', kanji: '甘', color: '', sabores: dulces },
+  { titulo: 'Picantes', kanji: '辛', color: 'text-chile-texto', sabores: picantes },
+];
 ---
 <section id="sabores" data-nivel="2" class="seccion bg-arroz bg-ichimatsu" aria-labelledby="sabores-titulo">
   <div class="contenedor flex flex-col gap-10">
@@ -10,36 +15,24 @@ import { dulces, picantes } from '../data/menu';
       <p class="max-w-[24em] rounded-2xl border-[3px] border-tinta bg-blanco px-3.5 py-2.5">Todos a $1 la unidad. Las llamas marcan el nivel de picante.</p>
     </div>
 
-    <h3 class="font-display text-[32px]">Dulces <span class="text-[22px]" lang="ja">甘</span></h3>
-    <ul class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-x-5 gap-y-16 pt-10">
-      {dulces.map((s) => (
-        <li class:list={['flex flex-col gap-2 rounded-[28px] border-[3px] border-tinta p-6 shadow-pop-lg', s.fondo]}>
-          <MochiSabor id={s.id} ancho={96} class="-mt-14 mb-1 self-center" />
-          <h4 class="font-display text-[28px] leading-tight">{s.nombre}</h4>
-          <p>{s.descripcion}</p>
-          <div data-no-centrar class="mt-auto flex justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
-            <Llamas cantidad={s.llamas} />
-            <span>{s.precio}</span>
-          </div>
-        </li>
-      ))}
-    </ul>
-
-    <h3 class="mt-4 font-display text-[32px] text-chile-texto">Picantes <span class="text-[22px]" lang="ja">辛</span></h3>
-    <ul class="grid grid-cols-[repeat(auto-fit,minmax(min(100%,320px),1fr))] gap-5">
-      {picantes.map((s) => (
-        <li class:list={['flex flex-wrap items-center gap-5 rounded-[28px] border-[3px] border-tinta p-6 shadow-pop-lg', s.fondo]}>
-          <MochiSabor id={s.id} ancho={120} camina="izq" />
-          <div class="flex min-w-[200px] flex-1 flex-col gap-2">
-            <h4 class="font-display text-[30px] leading-tight">{s.nombre}</h4>
-            <p>{s.descripcion}</p>
-            <div data-no-centrar class="flex items-center justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
-              <Llamas cantidad={s.llamas} />
-              <span>{s.precio}</span>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ul>
+    {grupos.map((g) => (
+      <div class="flex flex-col gap-4">
+        <h3 class:list={['font-display text-[32px]', g.color]}>{g.titulo} <span class="text-[22px]" lang="ja">{g.kanji}</span></h3>
+        <!-- Todas las tarjetas comparten estilo: mochi asomando arriba, nombre, descripción y pie con llamas y precio -->
+        <ul class="grid grid-cols-1 gap-x-5 gap-y-16 pt-12 sm:grid-cols-2 lg:grid-cols-3">
+          {g.sabores.map((s) => (
+            <li id={`sabor-${s.id}`} class:list={['flex scroll-mt-32 flex-col gap-2 rounded-[28px] border-[3px] border-tinta p-6 pt-0 shadow-pop-lg', s.fondo]}>
+              <MochiSabor id={s.id} ancho={110} class="-mt-16 mb-1 self-center" />
+              <h4 class="font-display text-[clamp(24px,2.4vw,28px)] leading-tight">{s.nombre}</h4>
+              <p>{s.descripcion}</p>
+              <div data-no-centrar class="mt-auto flex items-center justify-between border-t-[3px] border-dotted border-tinta pt-2 font-bold">
+                <Llamas cantidad={s.llamas} />
+                <span>{s.precio}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
   </div>
 </section>

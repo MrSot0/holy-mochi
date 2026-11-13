@@ -5,15 +5,15 @@ import { site } from '../data/site';
 import type { SaborId } from '../data/mochis';
 
 // Móvil: los seis mochis llegan desde los bordes y se reúnen
-const atras: SaborId[] = ['fresa', 'pina', 'parchita'];
-const delante: SaborId[] = ['mango', 'tabasco', 'cayena'];
+const atras: SaborId[] = ['pinaparchita', 'fresa', 'chocolate'];
+const delante: SaborId[] = ['ajipimienta', 'cayenapiripiri', 'cuatrofuegos'];
 ---
 <section id="inicio" data-nivel="1" class="seccion bg-pina bg-lunares max-md:!pt-8">
   <div class="contenedor flex flex-wrap items-center gap-8 md:gap-12">
     <div
       class="reunion w-full md:hidden"
       role="img"
-      aria-label="Los seis mochis de Holy Mochi juntos: fresa, piña, parchita, mango, tabasco y cayena"
+      aria-label="Los seis mochis de Holy Mochi juntos: piña parchita, fresa, chocolate, ají y pimienta, cayena y piri piri, y ají con pimienta roja, cayena y tabasco"
     >
       <div class="flex items-end justify-center gap-1">
         {atras.map((id, i) => (
@@ -34,7 +34,7 @@ const delante: SaborId[] = ['mango', 'tabasco', 'cayena'];
         Mochis que pican. <span class="text-chile-texto">Mochis que retan.</span>
       </h1>
       <p class="hidden max-w-[30em] text-[clamp(18px,2.2vw,22px)] leading-normal md:block">
-        Fresa, piña, parchita y mango para los dulceros. Tabasco y cayena para los valientes. Elige tu sabor y acepta un reto.
+        Piña parchita, fresa y chocolate para los dulceros. Ají, pimienta, cayena, piri piri y tabasco para los valientes. Elige tu sabor y acepta un reto.
       </p>
       <p class="text-[18px] md:hidden">{site.ciudad} · Todos a $1</p>
       <div class="flex flex-wrap gap-4">

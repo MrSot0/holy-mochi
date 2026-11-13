@@ -1,4 +1,3 @@
-import { compartir } from '../data/site';
 import { todos, type Sabor } from '../data/menu';
 import { animacionSabor, svgCompleto } from '../data/mochis';
 
@@ -162,13 +161,10 @@ export function iniciarRuleta(): void {
     $<SVGGElement>(nodo, '[data-res-anim]').setAttribute('class', animacionSabor[sabor.id]);
     $<HTMLElement>(nodo, '[data-res-titulo]').textContent = titulo;
     $<HTMLElement>(nodo, '[data-res-detalle]').textContent = detalle;
-    const aviso = $<HTMLElement>(nodo, '[data-res-aviso]');
-    $<HTMLButtonElement>(nodo, '[data-res-cta]').addEventListener('click', async () => {
-      const r = await compartir(`Jugué a "${NOMBRES[juego]}" en Holy Mochi y me tocó un mochi de ${sabor.nombre}. ¿Y a ti?`);
-      aviso.textContent =
-        r === 'copiado' ? 'Copiado. Pégalo en tus redes, etiquétanos y gana un mochi gratis.' :
-        r === 'compartido' ? '¡Compartido! Etiquétanos para reclamar tu mochi gratis.' : '';
-    });
+    // lleva a la tarjeta de ese sabor en la carta
+    const cta = $<HTMLAnchorElement>(nodo, '[data-res-cta]');
+    cta.href = `#sabor-${sabor.id}`;
+    cta.textContent = `Ver ${sabor.nombre} en la carta`;
     $<HTMLButtonElement>(nodo, '[data-res-otra]').addEventListener('click', volver);
     destino.replaceChildren(nodo);
     destino.hidden = false;
@@ -233,7 +229,7 @@ function juegoAtrapa(panel: HTMLElement, alResultado: AlResultado): Minijuego {
   let jugando = false;
 
   function valor(s: Sabor) {
-    return Math.max(1, s.llamas - 1);
+    return Math.max(1, s.llamas);
   }
 
   function medir() {
@@ -492,10 +488,10 @@ function juegoCaja(panel: HTMLElement, alResultado: AlResultado): Minijuego {
   const minirretos = [
     'Cómelo en dos bocados.',
     'Cómelo con los ojos cerrados y adivina el sabor.',
-    'Compártelo con quien te mandó la web.',
     'Aguanta 30 segundos sin agua después del último bocado.',
-    'Grábate comiéndolo y etiquétanos.',
-    'Pídelo junto a un Cayena y elige quién se come cuál.',
+    'Pide otro de un nivel más picante.',
+    'Llévate una caja de tres y no compartas ninguno.',
+    'Cómelo sin hacer caras. Suerte con eso.',
   ];
   let temporizador = 0;
 
